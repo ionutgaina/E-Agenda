@@ -9,6 +9,7 @@ import { AgendaDataSource, IPerson } from '../shared';
 })
 export class AgendaComponent implements OnInit {
   persons: IPerson[] = [];
+  options = false;
 
   subscription: Subscription | undefined;
   searchTerm: string = '';

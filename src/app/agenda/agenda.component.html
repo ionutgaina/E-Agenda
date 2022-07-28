@@ -1,40 +1,52 @@
-<h1 class="text-center">Agenda ta electronică</h1>
-<hr />
+<div class="text-center border-bottom border-dark p-1">
+  <h1>Agenda ta electronică</h1>
+</div>
 <div class="container">
-  <div class="row">
+  <div class="row mt-5">
+    <div class="col-md-6 col-sm-12">
 
-    <div class="col-md-6">
-      <div class="col-md-4">
-        <input type="text" (keyup)="search($event)">
-
-      </div>
-      <div class="col-md-4">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <label class="input-group-text" for="inputGroupSelect01">Sortează</label>
+      <div class="d-flex justify-sm-content-center row">
+        <!-- Options button -->
+        <div class="row mb-1">
+          <button (click)="options = !options" class="btn btn-secondary w-100">Opțiuni persoane</button>
+        </div>
+        <div *ngIf="options" class="col-md-6 w-md-50 p-3">
+          <!-- search input -->
+          <div class="input-group col-md-12 mb-3">
+            <input class="form-control" type="text" placeholder="Caută" (keyup)="search($event)">
           </div>
-          <select (change)="sortHandler($event)" class="custom-select" id="inputGroupSelect01">
-            <option selected>Alege</option>
-            <option value="firstname">Nume</option>
-            <option value="lastname">Prenume</option>
-            <option value="age">Varsta</option>
-            <option value="date">Data</option>
-          </select>
+
+          <!-- sort input -->
+          <div class="row">
+            <div class="input-group mb-3">
+              <span class="input-group-text" for="selectSort">Sortează</span>
+
+              <select (change)="sortHandler($event)" class="form-control" id="selectSort">
+                <option selected value="">Implicit</option>
+                <option value="firstname">Nume</option>
+                <option value="lastname">Prenume</option>
+                <option value="age">Varsta</option>
+                <option value="date">Data</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <button class="btn btn-light w-100" [routerLink]="['/agenda/new']">Contact Nou</button>
+          </div>
+
         </div>
 
-        <button class="btn btn-primary" [routerLink]="['/agenda/new']">Contact Nou</button>
-
-
       </div>
-      <div *ngFor="let item of sortedPersons" class="col border-bottom border-dark p-1">
-        <contact-thumbnail [person]="item"></contact-thumbnail>
+      <div *ngFor="let item of sortedPersons" class="row">
+        <ul class="list-group">
+          <contact-thumbnail [person]="item"></contact-thumbnail>
+        </ul>
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 col-sm-12">
       <router-outlet></router-outlet>
     </div>
   </div>
-
-
 </div>
