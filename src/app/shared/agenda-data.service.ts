@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgCloneDeepService } from 'ng-clone-deep';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { IPerson } from './agenda-data.model';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class AgendaDataSource {
     return PERSONS.filter((person) => person.id === id)[0];
   }
 
-  createPerson() {}
+  createPerson(formValues: IPerson) {}
 
   updatePerson() {}
 
