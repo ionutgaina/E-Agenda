@@ -1,1 +1,4 @@
-<p>afisez {{person?.firstname}} {{person?.lastname}}</p>
+<div *ngIf="person" >
+  <p>afisez {{person?.firstname}} {{person?.lastname}}</p>
+  <button (click)="removeContact(person.id)">STERGE</button>
+</div>

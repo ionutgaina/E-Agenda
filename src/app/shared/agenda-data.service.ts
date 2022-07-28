@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { IPerson } from './agenda-data.model';
 
 @Injectable({
@@ -22,7 +22,11 @@ export class AgendaDataSource {
 
   updatePerson() {}
 
-  deletePerson() {}
+  deletePerson(id: number) {
+    let index = PERSONS.findIndex((person) => person.id === id);
+    PERSONS.splice(index)
+
+  }
 }
 
 const PERSONS: IPerson[] = [

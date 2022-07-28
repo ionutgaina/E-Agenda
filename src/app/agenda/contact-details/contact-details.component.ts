@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AgendaDataSource, IPerson } from 'src/app/shared';
 
@@ -13,7 +13,8 @@ export class ContactDetailsComponent implements OnInit {
 
   constructor(
     private agendaService: AgendaDataSource,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -27,5 +28,10 @@ export class ContactDetailsComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscription?.unsubscribe();
+  }
+
+  removeContact(id:number){
+    this.agendaService.deletePerson(id)
+    this.router.navigate(['/agenda'])
   }
 }
