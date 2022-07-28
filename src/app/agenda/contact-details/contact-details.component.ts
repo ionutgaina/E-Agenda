@@ -30,8 +30,14 @@ export class ContactDetailsComponent implements OnInit {
     this.subscription?.unsubscribe();
   }
 
-  removeContact(id:number){
-    this.agendaService.deletePerson(id)
-    this.router.navigate(['/agenda'])
+  removeContact(id: number) {
+    if (
+      confirm(
+        `Ești sigur că dorești să ștergi contactul ${this.person?.firstname} ${this.person?.lastname}`
+      )
+    ) {
+      this.agendaService.deletePerson(id);
+      this.router.navigate(['/agenda']);
+    }
   }
 }

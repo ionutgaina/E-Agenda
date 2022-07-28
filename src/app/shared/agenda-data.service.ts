@@ -25,7 +25,7 @@ export class AgendaDataSource {
   deletePerson(id: number) {
     let index = PERSONS.findIndex((person) => person.id === id);
     PERSONS.splice(index)
-
+    this.subject.next(PERSONS)
   }
 }
 
