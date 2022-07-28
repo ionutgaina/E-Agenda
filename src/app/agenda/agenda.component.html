@@ -1,1 +1,17 @@
-<p>agenda works!</p>
+<h1 class="text-center">Agenda ta electronică</h1>
+<hr />
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div *ngFor="let item of persons" class="col border-bottom border-dark p-1">
+        <contact-thumbnail [person]="item"></contact-thumbnail>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+
+</div>

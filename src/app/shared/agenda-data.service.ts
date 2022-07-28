@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { IPerson } from './agenda-data.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AgendaDataSource {
+  subject = new BehaviorSubject(PERSONS);
+
   constructor() {}
 
-  getList() {}
+  getList() {
+    return this.subject;
+  }
 
-  getPerson() {}
+  getPerson(id: number) {
+    return PERSONS.filter((person) => person.id === id)[0];
+  }
 
   createPerson() {}
 
@@ -55,7 +62,7 @@ const PERSONS: IPerson[] = [
     notes: '',
   },
   {
-    id: 1,
+    id: 2,
     firstname: 'Gaina2',
     lastname: 'Ionut2',
     date: new Date('5/30/2001'),
@@ -88,5 +95,5 @@ const PERSONS: IPerson[] = [
       },
     ],
     notes: '',
-  }
+  },
 ];
