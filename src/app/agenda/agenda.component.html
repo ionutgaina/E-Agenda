@@ -3,7 +3,8 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <div *ngFor="let item of persons" class="col border-bottom border-dark p-1">
+      <input type="text" (keyup)="search($event)">
+      <div *ngFor="let item of foundedPersons" class="col border-bottom border-dark p-1">
         <contact-thumbnail [person]="item"></contact-thumbnail>
       </div>
     </div>

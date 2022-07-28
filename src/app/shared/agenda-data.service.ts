@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { NgCloneDeepService } from 'ng-clone-deep';
+import { BehaviorSubject, of } from 'rxjs';
 import { IPerson } from './agenda-data.model';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { IPerson } from './agenda-data.model';
 export class AgendaDataSource {
   subject = new BehaviorSubject(PERSONS);
 
-  constructor() {}
+  constructor(private cloneDeep: NgCloneDeepService) {}
 
   getList() {
     return this.subject;
@@ -24,8 +25,22 @@ export class AgendaDataSource {
 
   deletePerson(id: number) {
     let index = PERSONS.findIndex((person) => person.id === id);
-    PERSONS.splice(index)
-    this.subject.next(PERSONS)
+    PERSONS.splice(index, 1);
+    this.subject.next(PERSONS);
+  }
+
+  searchPersons(searchTerm: string, persons: IPerson[]) {
+    let result: IPerson[] = [];
+
+    const copy_persons = this.cloneDeep.clone(persons);
+
+    result = copy_persons.filter((person: IPerson) => {
+      return (
+        person.firstname.toLocaleLowerCase().includes(searchTerm) ||
+        person.lastname.toLocaleLowerCase().includes(searchTerm)
+      );
+    });
+    return result
   }
 }
 

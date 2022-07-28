@@ -24,6 +24,7 @@
     "@ng-bootstrap/ng-bootstrap": "^12.1.2",
     "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.2.0",
+    "ng-clone-deep": "0.0.2",
     "rxjs": "~7.5.0",
     "save": "^2.5.0",
     "tslib": "^2.3.0",
