@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AgendaDataSource, IPerson } from 'src/app/shared';
 
@@ -9,6 +9,8 @@ import { AgendaDataSource, IPerson } from 'src/app/shared';
 })
 export class CreateContactComponent implements OnInit {
   personForm: any;
+  contactsList = ['Personal', 'Serviciu', 'Acasă'];
+  addressesList = ['Serviciu', 'Acasă'];
 
   constructor(
     private router: Router,
@@ -75,8 +77,9 @@ export class CreateContactComponent implements OnInit {
 
   savePerson() {
     const formValues = this.personForm.value;
-    this.agendaService.createPerson(formValues);
-    this.router.navigate(['/agenda']);
+    console.log(formValues);
+    // this.agendaService.createPerson(formValues);
+    // this.router.navigate(['/agenda']);
   }
   cancel() {
     this.router.navigate(['/agenda']);

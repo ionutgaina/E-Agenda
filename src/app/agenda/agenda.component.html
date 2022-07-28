@@ -3,9 +3,14 @@
 </div>
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-6 col-sm-12">
+    <div class="col-md-6 col-sm-12 mb-5">
 
       <div class="d-flex justify-sm-content-center row">
+        <!-- Create button -->
+        <div class="row mb-1">
+          <button class="btn btn-success w-100" [routerLink]="['/agenda/new']">Contact Nou</button>
+        </div>
+
         <!-- Options button -->
         <div class="row mb-1">
           <button (click)="options = !options" class="btn btn-secondary w-100">Opțiuni persoane</button>
@@ -29,10 +34,6 @@
                 <option value="date">Data</option>
               </select>
             </div>
-          </div>
-
-          <div class="col-md-12">
-            <button class="btn btn-light w-100" [routerLink]="['/agenda/new']">Contact Nou</button>
           </div>
 
         </div>

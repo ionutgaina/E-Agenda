@@ -19,9 +19,9 @@ export class AgendaDataSource {
     return PERSONS.filter((person) => person.id === id)[0];
   }
 
-  createPerson(formValues:any) {}
+  createPerson(formValues: any) {}
 
-  updatePerson() {}
+  updatePerson(formValues: any) {}
 
   deletePerson(id: number) {
     let index = PERSONS.findIndex((person) => person.id === id);
@@ -67,8 +67,6 @@ export class AgendaDataSource {
     return result;
   }
 }
-
-
 
 const PERSONS: IPerson[] = [
   {
