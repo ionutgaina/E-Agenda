@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { IPerson } from './agenda-data.model';
 
 @Injectable({
@@ -18,14 +18,33 @@ export class AgendaDataSource {
     return PERSONS.filter((person) => person.id === id)[0];
   }
 
-  createPerson() {}
+  createPerson(formValues: IPerson) {}
 
   updatePerson() {}
 
   deletePerson(id: number) {
     let index = PERSONS.findIndex((person) => person.id === id);
-    PERSONS.splice(index)
-    this.subject.next(PERSONS)
+    PERSONS.splice(index);
+    this.subject.next(PERSONS);
+  }
+
+  // TO DO sortare ascendenta ( nume, prenume, varsta ,data nasterii)
+  // Sortarea e grupata dupa prima litera , varsta , data nasterii
+  // TO DO filtrare in timp real dupa nume, prenume
+
+  searchPersons(searchTerm: string) {
+    const term = searchTerm.toLocaleLowerCase();
+
+    const copy_PERSONS = JSON.parse(JSON.stringify(PERSONS));
+    console.log(term);
+    const results = copy_PERSONS.filter((person: IPerson) => {
+      return (
+        person.firstname.toLocaleLowerCase().indexOf(term) > -1 ||
+        person.lastname.toLocaleLowerCase().includes(term)
+      );
+    });
+    console.log(results);
+    return of(results);
   }
 }
 

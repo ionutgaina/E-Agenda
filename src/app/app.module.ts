@@ -9,6 +9,8 @@ import { appRoutes } from './routes';
 import { Error404Component } from './errors/error404/error404.component';
 import { ContactThumbnailComponent } from './agenda/contact-thumbnail/contact-thumbnail.component';
 import { ContactDetailsComponent } from './agenda/contact-details/contact-details.component';
+import { CreateContactComponent } from './agenda/create-contact/create-contact.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,10 +18,12 @@ import { ContactDetailsComponent } from './agenda/contact-details/contact-detail
     AgendaComponent,
     Error404Component,
     ContactThumbnailComponent,
-    ContactDetailsComponent
+    ContactDetailsComponent,
+    CreateContactComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AgendaDataSource, IPerson } from '../shared';
 
@@ -9,6 +9,8 @@ import { AgendaDataSource, IPerson } from '../shared';
 export class AgendaComponent implements OnInit {
   persons: IPerson[] | undefined;
   subscription: Subscription | undefined;
+  foundPersons: IPerson[] = [];
+  searchTerm: string = '';
 
   constructor(private agendaService: AgendaDataSource) {}
 
@@ -20,5 +22,15 @@ export class AgendaComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscription?.unsubscribe();
+  }
+
+  searchPersons(event: any) {
+    this.searchTerm = event.target.value;
+
+    this.agendaService
+      .searchPersons(this.searchTerm)
+      .subscribe((persons: IPerson[]) => {
+        this.persons = persons;
+      });
   }
 }

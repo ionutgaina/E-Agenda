@@ -2,6 +2,11 @@
 <hr />
 <div class="container">
   <div class="row">
+      <div class="form-group">
+        <input (keyup)="searchPersons($event)" name="searchPersons" type="text" class="form-control"
+          placeholder="Caută persoane">
+      </div>
+
     <div class="col-md-6">
       <div *ngFor="let item of persons" class="col border-bottom border-dark p-1">
         <contact-thumbnail [person]="item"></contact-thumbnail>
