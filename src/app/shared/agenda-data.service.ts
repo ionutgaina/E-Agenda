@@ -40,7 +40,31 @@ export class AgendaDataSource {
         person.lastname.toLocaleLowerCase().includes(searchTerm)
       );
     });
-    return result
+    return result;
+  }
+
+  sortByFirstName(persons: IPerson[]) {
+    let result: IPerson[] = this.cloneDeep.clone(persons);
+    result.sort((a, b) => {
+      return a.firstname >= b.firstname ? 1 : -1;
+    });
+    return result;
+  }
+
+  sortByLastName(persons: IPerson[]) {
+    let result: IPerson[] = this.cloneDeep.clone(persons);
+    result.sort((a, b) => {
+      return a.lastname >= b.lastname ? 1 : -1;
+    });
+    return result;
+  }
+
+  sortByAge(persons: IPerson[]) {
+    let result: IPerson[] = this.cloneDeep.clone(persons);
+    result.sort((a, b) => {
+      return a.date >= b.date ? 1 : -1;
+    });
+    return result;
   }
 }
 
@@ -81,9 +105,44 @@ const PERSONS: IPerson[] = [
     notes: '',
   },
   {
+    id: 3,
+    firstname: 'Ardei',
+    lastname: 'AVasile',
+    date: new Date('5/32/2023'),
+    contacts: [
+      {
+        number: '075532116',
+        type: 'Personal',
+      },
+      {
+        number: '024321331',
+        type: 'Acasă',
+      },
+    ],
+    addresses: [
+      {
+        location: {
+          street: 'Str. Pădurilor 12',
+          city: 'Sălcuța',
+          country: 'Republica Moldova',
+        },
+        type: 'Acasă',
+      },
+      {
+        location: {
+          street: 'Str. Independenței 290',
+          city: 'București',
+          country: 'România',
+        },
+        type: 'Serviciu',
+      },
+    ],
+    notes: '',
+  },
+  {
     id: 2,
-    firstname: 'Gaina2',
-    lastname: 'Ionut2',
+    firstname: 'Petrusca',
+    lastname: 'Adrian',
     date: new Date('5/30/2001'),
     contacts: [
       {

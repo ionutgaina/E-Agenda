@@ -2,14 +2,28 @@
 <hr />
 <div class="container">
   <div class="row">
-      <div class="form-group">
-        <input (keyup)="search($event)" name="searchPersons" type="text" class="form-control"
-          placeholder="Caută persoane">
-      </div>
 
     <div class="col-md-6">
-      <input type="text" (keyup)="search($event)">
-      <div *ngFor="let item of foundedPersons" class="col border-bottom border-dark p-1">
+      <div class="col-md-4">
+        <input type="text" (keyup)="search($event)">
+
+      </div>
+      <div class="col-md-4">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Sortează</label>
+          </div>
+          <select (change)="sortHandler($event)" class="custom-select" id="inputGroupSelect01">
+            <option selected>Alege</option>
+            <option value="firstname">Nume</option>
+            <option value="lastname">Prenume</option>
+            <option value="age">Varsta</option>
+            <option value="date">Data</option>
+          </select>
+        </div>
+
+      </div>
+      <div *ngFor="let item of sortedPersons" class="col border-bottom border-dark p-1">
         <contact-thumbnail [person]="item"></contact-thumbnail>
       </div>
     </div>
