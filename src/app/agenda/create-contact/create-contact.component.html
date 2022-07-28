@@ -1,1 +1,10 @@
-<p>create-contact works!</p>
+<form [formGroup]="personForm" (ngSubmit)="savePerson()" >
+
+  <p>
+    <label for="firstname">First Name </label>
+    <input type="text" id="firstname" name="firstname" formControlName="firstname">
+  </p>
+
+  <button type="submit" class="btn btn-primary">Save</button>
+  <button type="button" [disabled]="personForm.valid" class="btn btn-default" (click)="cancel()">Cancel</button>
+</form>

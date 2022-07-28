@@ -10,7 +10,7 @@ import { Error404Component } from './errors/error404/error404.component';
 import { ContactThumbnailComponent } from './agenda/contact-thumbnail/contact-thumbnail.component';
 import { ContactDetailsComponent } from './agenda/contact-details/contact-details.component';
 import { CreateContactComponent } from './agenda/create-contact/create-contact.component';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [

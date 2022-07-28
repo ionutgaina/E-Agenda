@@ -22,6 +22,9 @@
           </select>
         </div>
 
+        <button class="btn btn-primary" [routerLink]="['/agenda/new']">Contact Nou</button>
+
+
       </div>
       <div *ngFor="let item of sortedPersons" class="col border-bottom border-dark p-1">
         <contact-thumbnail [person]="item"></contact-thumbnail>

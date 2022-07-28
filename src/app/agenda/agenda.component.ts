@@ -43,7 +43,6 @@ export class AgendaComponent implements OnInit {
 
   sortValue() {
     let result: IPerson[] = [];
-    console.log(this.sortingTerm);
     switch (this.sortingTerm) {
       case 'firstname':
         result = this.agendaService.sortByFirstName(this.foundedPersons);

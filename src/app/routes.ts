@@ -9,8 +9,8 @@ export const appRoutes: Routes = [
     path: 'agenda',
     component: AgendaComponent,
     children: [
-      { path: ':id', component: ContactDetailsComponent },
       { path: 'new', component: CreateContactComponent },
+      { path: ':id', component: ContactDetailsComponent },
     ],
   },
   { path: '404', component: Error404Component },
