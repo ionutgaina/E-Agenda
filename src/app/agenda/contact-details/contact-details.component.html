@@ -63,7 +63,7 @@
 
     <div class="d-flex justify-content-around p-3">
       <button class="btn btn-danger" (click)="removeContact(person.id)">STERGE</button>
-      <button class="btn btn-warning" (click)="removeContact(person.id)">UPDATE</button>
+      <button (click)="updateHandler()" class="btn btn-warning" >UPDATE</button>
     </div>
   </form>
 

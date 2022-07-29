@@ -21,18 +21,26 @@ export class AgendaDataSource {
   }
 
   createPerson(formValues: any) {
-    const index = PERSONS.length - 1
-    let id = PERSONS[index].id + 1
-    formValues.id = id
-    if(formValues.date)
-    formValues.date = new Date(formValues.date)
-    PERSONS.push(formValues)
+    const index = PERSONS.length - 1;
+    let id = PERSONS[index].id + 1;
+    formValues.id = id;
+    if (formValues.date) {
+      formValues.date = new Date(formValues.date);
+    }
+
+    PERSONS.push(formValues);
     this.subject.next(PERSONS);
-    return id
+    return id;
   }
 
   updatePerson(formValues: any) {
+    if (formValues.date) formValues.date = new Date(formValues.date);
 
+    let id = formValues.id;
+
+    let index = PERSONS.findIndex((person) => person.id === id);
+    PERSONS[index] = formValues;
+    this.subject.next(PERSONS);
   }
 
   deletePerson(id: number) {
@@ -78,6 +86,20 @@ export class AgendaDataSource {
     });
     return result;
   }
+
+  // formating data for input type="date"
+  formatDate(date: Date) {
+    function padTo2Digits(num: number) {
+      return num.toString().padStart(2, '0');
+    }
+    if (date)
+      return [
+        date.getFullYear(),
+        padTo2Digits(date.getMonth() + 1),
+        padTo2Digits(date.getDate()),
+      ].join('-');
+    else return null;
+  }
 }
 
 const PERSONS: IPerson[] = [
@@ -86,21 +108,19 @@ const PERSONS: IPerson[] = [
     firstname: 'Gaina',
     lastname: 'Ionut',
     date: new Date('2022-10-30'),
-    contacts:
-      {
-        number: '0751911116',
-        type: 'Personal',
-      },
+    contacts: {
+      number: '0751911116',
+      type: 'Personal',
+    },
 
-    addresses:
-      {
-        location: {
-          street: 'Str. Pădurilor 12',
-          city: 'Sălcuța',
-          country: 'Republica Moldova',
-        },
-        type: 'Acasă',
+    addresses: {
+      location: {
+        street: 'Str. Padurilor 12',
+        city: 'Salcuta',
+        country: 'Republica Moldova',
       },
+      type: 'Acasă',
+    },
     notes: '',
   },
   {
@@ -108,21 +128,19 @@ const PERSONS: IPerson[] = [
     firstname: 'Ardei',
     lastname: 'AVasile',
     date: new Date('2022-10-30'),
-    contacts:
-      {
-        number: '075532116',
-        type: 'Personal',
-      },
+    contacts: {
+      number: '075532116',
+      type: 'Personal',
+    },
 
-    addresses:
-      {
-        location: {
-          street: 'Str. Pădurilor 12',
-          city: 'Sălcuța',
-          country: 'Republica Moldova',
-        },
-        type: 'Acasă',
+    addresses: {
+      location: {
+        street: 'Str. Padurilor 12',
+        city: 'Salcuța',
+        country: 'Republica Moldova',
       },
+      type: 'Acasă',
+    },
     notes: 'fdsaf',
   },
   {
@@ -130,20 +148,18 @@ const PERSONS: IPerson[] = [
     firstname: 'Petrusca',
     lastname: 'Adrian',
     date: new Date('2022-10-30'),
-    contacts:
-      {
-        number: '024341181',
-        type: 'Acasă',
+    contacts: {
+      number: '024341181',
+      type: 'Acasă',
+    },
+    addresses: {
+      location: {
+        street: 'Str. Padurilor 12',
+        city: 'Salcuța',
+        country: 'Republica Moldova',
       },
-    addresses:
-      {
-        location: {
-          street: 'Str. Pădurilor 12',
-          city: 'Sălcuța',
-          country: 'Republica Moldova',
-        },
-        type: 'Acasă',
-      },
+      type: 'Acasă',
+    },
     notes: 'fsafsfsaf',
   },
 ];

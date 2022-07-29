@@ -23,7 +23,7 @@ export class CreateContactComponent implements OnInit {
       lastname: ['', [Validators.pattern("^[a-z'-]+$"), Validators.maxLength(15), Validators.required]],
       date: [''],
       contacts: this.formBuilder.group({
-        number: ['', [Validators.pattern("^[+ 0-9]{9-12}$")]],
+        number: ['', [Validators.pattern("^[+ 0-9]{9,12}$")]],
         type: [''],
       }),
       addresses: this.formBuilder.group({
@@ -81,7 +81,18 @@ export class CreateContactComponent implements OnInit {
         this.router.navigate(['/agenda', id]);
     })
   }
-  cancel() {
-    this.router.navigate(['/agenda']);
+  cancelCreate() {
+    Swal.fire({
+      title: 'Datele introduse nu vor fi salvate. Ești sigur că vrei să ieși?',
+      showDenyButton: true,
+      confirmButtonText: 'Da',
+      confirmButtonColor: 'red',
+      denyButtonText: 'Nu',
+      denyButtonColor: 'green'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['/agenda']);
+      }
+    })
   }
 }

@@ -14,7 +14,7 @@ export class ContactDetailsComponent implements OnInit {
   isDisabled = true;
 
   personForm: any;
-  contactsList = ['Necunoscut','Personal', 'Serviciu', 'Acasă'];
+  contactsList = ['Personal', 'Serviciu', 'Acasă'];
   addressesList = ['Necunoscut','Serviciu', 'Acasă'];
 
   constructor(
@@ -54,37 +54,16 @@ export class ContactDetailsComponent implements OnInit {
     this.subscription?.unsubscribe();
   }
 
-  updateState() {
-    this.isDisabled = false;
-  }
-
-  updatePerson() {
-    console.log(this.personForm.value);
-  }
-
-  cancelUpdate() {
-    this.isDisabled = true;
-  }
-
-  includeContacts(contact: string)
+  formatDate(date: Date)
   {
-    return this.contactsList.includes(contact)
+    return this.agendaService.formatDate(date)
   }
 
-  // formating data for input type="date"
-  formatDate(date: Date) {
-    function padTo2Digits(num: number) {
-      return num.toString().padStart(2, '0');
-    }
-    if (date)
-      return [
-        date.getFullYear(),
-        padTo2Digits(date.getMonth() + 1),
-        padTo2Digits(date.getDate()),
-      ].join('-');
-    else return null;
+  updateHandler()
+  {
+    if(this.person)
+    this.router.navigate(['/agenda/'+ this.person.id +'/update'])
   }
-
   removeContact(id: number) {
     if (
       confirm(

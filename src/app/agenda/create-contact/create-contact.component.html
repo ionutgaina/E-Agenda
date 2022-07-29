@@ -103,7 +103,7 @@
   <div class="d-flex justify-content-around p-3">
     <button class="btn btn-primary col-md-3 " type="submit" [disabled]="!personForm.valid"
       (click)="savePerson">Submit</button>
-    <button class="btn btn-warning col-md-3 " type="button" [disabled]="!personForm.valid"
-      (click)="cancel()">Cancel</button>
+    <button class="btn btn-warning col-md-3 " type="button"
+      (click)="cancelCreate()">Cancel</button>
   </div>
 </form>
