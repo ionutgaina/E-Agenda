@@ -1,70 +1,77 @@
 <div *ngIf="person">
   <p class="fs-3 text-center">Detalii contact</p>
 
-  <form>
+  <div class="form-group">
+    <label for="firstname">Nume</label>
+    <input class="form-control" type="text" name="firstname" [value]="person.firstname" disabled>
+  </div>
+
+  <div class="form-group">
+    <label for="lastname">Prenume</label>
+    <input class="form-control" type="text" name="lastname" [value]="person.lastname" disabled>
+  </div>
+
+  <div class="form-group">
+    <label for="date">Data nașterii</label>
+    <input class="form-control" type="date" name="date" [value]="formatDate(person.date)" disabled>
+  </div>
+
+  <fieldset>
+    <p class="fs-6 mt-3">Date de contact</p>
     <div class="form-group">
-      <label for="firstname">Nume</label>
-      <input class="form-control" type="text" name="firstname" [value]="person.firstname" disabled>
-    </div>
+      <label for="number">Numărul de telefon</label>
+      <input class="form-control" type="text" name="number" [value]="person.contacts.number" disabled>
 
+      <label for="type">Tipul</label>
+      <select class="form-control" name="type" disabled>
+        <option selected>{{person.contacts.type}}</option>
+      </select>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <p class="fs-6 mt-3">Adrese</p>
     <div class="form-group">
-      <label for="lastname">Prenume</label>
-      <input class="form-control" type="text" name="lastname" [value]="person.lastname" disabled>
-    </div>
+      <fieldset>
+        <div class="row">
 
-    <div class="form-group">
-      <label for="date">Data nașterii</label>
-      <input class="form-control" type="date" name="date" [value]="formatDate(person.date)" disabled>
-    </div>
-
-    <fieldset>
-      <p class="fs-6 mt-3">Date de contact</p>
-      <div class="form-group">
-        <label for="number">Numărul de telefon</label>
-        <input class="form-control" type="text" name="number" [value]="person.contacts.number" disabled>
-        <label for="type">Tipul</label>
-        <select class="form-control" name="type" disabled>
-          <option selected>{{person.contacts.type}}</option>
-        </select>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <p class="fs-6 mt-3">Adrese</p>
-      <div class="form-group">
-        <fieldset>
-          <div class="row">
-            <div class="col">
-              <label for="country">Localitate</label>
-              <input class="form-control" type="text" name="country" [value]="person.addresses.location.country"
-                disabled>
-            </div>
-            <div class="col">
-              <label for="city">Oraș</label>
-              <input class="form-control" type="text" name="city" [value]="person.addresses.location.city" disabled>
-            </div>
-            <div class="col">
-              <label for="street">Stradă</label>
-              <input class="form-control" type="text" name="street" [value]="person.addresses.location.street" disabled>
-            </div>
+          <div class="col">
+            <label for="country">Localitate</label>
+            <input class="form-control" type="text" name="country" [value]="person.addresses.location.country" disabled>
           </div>
-        </fieldset>
-        <label for="type">Tipul</label>
-        <select class="form-control" name="type" disabled>
-          <option selected>{{person.addresses.type}}</option>
-        </select>
-      </div>
-    </fieldset>
 
-    <div class="form-group">
-      <label for="notes">Notițe</label>
-      <textarea class="form-control" rows="3" name="notes" [value]="person.notes" disabled></textarea>
-    </div>
+          <div class="col">
+            <label for="city">Oraș</label>
+            <input class="form-control" type="text" name="city" [value]="person.addresses.location.city" disabled>
+          </div>
 
-    <div class="d-flex justify-content-around p-3">
-      <button class="btn btn-danger" (click)="removeContact(person.id)">STERGE</button>
-      <button (click)="updateHandler()" class="btn btn-warning" >UPDATE</button>
+          <div class="col">
+            <label for="street">Stradă</label>
+            <input class="form-control" type="text" name="street" [value]="person.addresses.location.street" disabled>
+          </div>
+
+        </div>
+      </fieldset>
+
+      <label for="type">Tipul</label>
+      <select class="form-control" name="type" disabled>
+        <option selected>{{person.addresses.type}}</option>
+      </select>
+
     </div>
-  </form>
+  </fieldset>
+
+  <div class="form-group">
+    <label for="notes">Notițe</label>
+    <textarea class="form-control" rows="3" name="notes" [value]="person.notes" disabled></textarea>
+  </div>
+
+  <div class="d-flex justify-content-around p-3">
+    <button [routerLink]="['/agenda']" class="btn btn-primary">Renunță</button>
+
+    <button class="btn btn-danger" (click)="removeContact(person.id)">STERGE</button>
+
+    <button (click)="updateHandler()" class="btn btn-warning">Actualizează</button>
+  </div>
 
 </div>

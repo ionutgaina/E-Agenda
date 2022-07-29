@@ -5,10 +5,9 @@ import { Component } from '@angular/core';
   template: `
   <router-outlet></router-outlet>
   `,
-  styles: [
-
-  ]
+  styles: []
 })
+
 export class AppComponent {
   title = 'E-agenda';
 }

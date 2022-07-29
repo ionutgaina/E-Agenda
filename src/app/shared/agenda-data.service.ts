@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NgCloneDeepService } from 'ng-clone-deep';
-import { BehaviorSubject, fromEventPattern } from 'rxjs';
-import Swal from 'sweetalert2';
+import { BehaviorSubject } from 'rxjs';
 import { IPerson } from './agenda-data.model';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -82,7 +80,7 @@ export class AgendaDataSource {
   sortByAge(persons: IPerson[]) {
     let result: IPerson[] = this.cloneDeep.clone(persons);
     result.sort((a, b) => {
-      return a.date >= b.date ? 1 : -1;
+      return a.date >= b.date ? -1 : 1;
     });
     return result;
   }
@@ -136,7 +134,7 @@ const PERSONS: IPerson[] = [
     addresses: {
       location: {
         street: 'Str. Padurilor 12',
-        city: 'Salcuța',
+        city: 'Salcuta',
         country: 'Republica Moldova',
       },
       type: 'Acasă',

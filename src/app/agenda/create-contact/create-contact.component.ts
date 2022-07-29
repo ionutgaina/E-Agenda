@@ -19,18 +19,32 @@ export class CreateContactComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.personForm = this.formBuilder.group({
-      firstname: ['', [Validators.pattern("^[a-zA-Z'-]+$"), Validators.maxLength(15), Validators.required]],
-      lastname: ['', [Validators.pattern("^[a-z'-]+$"), Validators.maxLength(15), Validators.required]],
+      firstname: [
+        '',
+        [
+          Validators.pattern("^[a-zA-Z'-]+$"),
+          Validators.maxLength(15),
+          Validators.required,
+        ],
+      ],
+      lastname: [
+        '',
+        [
+          Validators.pattern("^[a-z'-]+$"),
+          Validators.maxLength(15),
+          Validators.required,
+        ],
+      ],
       date: [''],
       contacts: this.formBuilder.group({
-        number: ['', [Validators.pattern("^[+ 0-9]{9,12}$")]],
+        number: ['', [Validators.pattern('^[+ 0-9]{9,12}$')]],
         type: [''],
       }),
       addresses: this.formBuilder.group({
         location: this.formBuilder.group({
           street: ['', [Validators.pattern("^[a-zA-Z'-]+$")]],
-          city: ['', [Validators.pattern("^[a-zA-Z-]+$")]],
-          country: ['', [Validators.pattern("^[a-zA-Z]+$")]],
+          city: ['', [Validators.pattern('^[a-zA-Z-]+$')]],
+          country: ['', [Validators.pattern('^[a-zA-Z]+$')]],
         }),
         type: [''],
       }),
@@ -64,35 +78,34 @@ export class CreateContactComponent implements OnInit {
     return this.personForm.get('addresses').get('location').get('street');
   }
 
-
   ngOnInit(): void {}
 
   savePerson() {
     const formValues = this.personForm.value;
-    console.log(formValues);
+
     let id = this.agendaService.createPerson(formValues);
     Swal.fire({
       icon: 'success',
       title: 'Ai creat cu succes contactul',
       position: 'top-end',
       showConfirmButton: false,
-      timer: 1500
+      timer: 1500,
     }).then(() => {
-        this.router.navigate(['/agenda', id]);
-    })
+      this.router.navigate(['/agenda', id]);
+    });
   }
   cancelCreate() {
     Swal.fire({
-      title: 'Datele introduse nu vor fi salvate. Ești sigur că vrei să ieși?',
+      title: 'Datele introduse nu vor fi salvate',
       showDenyButton: true,
-      confirmButtonText: 'Da',
+      confirmButtonText: 'Ok',
       confirmButtonColor: 'red',
-      denyButtonText: 'Nu',
-      denyButtonColor: 'green'
+      denyButtonText: 'Renunță',
+      denyButtonColor: 'green',
     }).then((result) => {
       if (result.isConfirmed) {
         this.router.navigate(['/agenda']);
       }
-    })
+    });
   }
 }
