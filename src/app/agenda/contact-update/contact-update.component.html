@@ -1,0 +1,82 @@
+<!-- <p>contact-update works!</p>
+<div *ngIf="person">
+  <p class="fs-3 text-center">Detalii contact</p>
+
+  <form [formGroup]="personForm" (ngSubmit)="updatePerson()" novalidate>
+    <div class="form-group">
+      <label for="firstname">Nume</label>
+      <input class="form-control" type="text" name="firstname" formControlName="firstname" [value]="person.firstname"
+        [attr.disabled]="isDisabled?'true':null">
+    </div>
+
+    <div class="form-group">
+      <label for="lastname">Prenume</label>
+      <input class="form-control" type="text" name="lastname" formControlName="lastname" [value]="person.lastname"
+        [attr.disabled]="isDisabled?'true':null">
+    </div>
+
+    <div class="form-group">
+      <label for="date">Data nașterii</label>
+      <input class="form-control" type="date" name="date" formControlName="date" [value]="formatDate(person.date)"
+        [attr.disabled]="isDisabled?'true':null">
+    </div>
+
+    <fieldset formGroupName="contacts">
+      <p class="fs-6 mt-3">Date de contact</p>
+      <div class="form-group">
+        <label for="number">Numărul de telefon</label>
+        <input class="form-control" type="text" name="number" formControlName="number" [value]="person.contacts.number"
+          [attr.disabled]="isDisabled?'true':null">
+        <label for="type">Tipul</label>
+        <select class="form-control" name="type" formControlName="type" [attr.disabled]="isDisabled?'true':null">
+          <option [attr.selected]="contactsList.includes('person.contacts.type')" *ngFor="let contact of contactsList">{{contact}}</option>
+        </select>
+      </div>
+    </fieldset>
+
+    <fieldset formGroupName="addresses">
+      <p class="fs-6 mt-3">Adrese</p>
+      <div class="form-group">
+        <fieldset formGroupName="location">
+          <div class="row">
+            <div class="col">
+              <label for="country">Localitate</label>
+              <input class="form-control" type="text" name="country" formControlName="country" [value]="person.addresses.location.country"
+                [attr.disabled]="isDisabled?'true':null">
+            </div>
+            <div class="col">
+              <label for="city">Oraș</label>
+              <input class="form-control" type="text" name="city" formControlName="city" [value]="person.addresses.location.city"
+                [attr.disabled]="isDisabled?'true':null">
+            </div>
+            <div class="col">
+              <label for="street">Stradă</label>
+              <input class="form-control" type="text" name="street" formControlName="street" [value]="person.addresses.location.street"
+                [attr.disabled]="isDisabled?'true':null">
+            </div>
+          </div>
+        </fieldset>
+        <label for="type">Tipul</label>
+        <select class="form-control" name="type" formControlName="type" [attr.disabled]="isDisabled?'true':null">
+          <option [attr.selected]="addressesList.includes('person.addresses.type')" *ngFor="let address of addressesList">{{address}}</option>
+        </select>
+      </div>
+    </fieldset>
+
+    <div class="form-group">
+      <label for="notes">Notițe</label>
+      <textarea class="form-control" rows="3" name="notes" formControlName="notes" [value]="person.notes"
+        [attr.disabled]="isDisabled?'true':null"></textarea>
+    </div>
+
+    <div *ngIf="!isDisabled" class="d-flex justify-content-around p-3">
+
+    </div>
+  </form>
+
+  <div *ngIf="isDisabled" class="d-flex justify-content-around p-3">
+    <button class="btn btn-danger" (click)="removeContact(person.id)">STERGE</button>
+    <button class="btn btn-warning" (click)="updateState()">UPDATE</button>
+  </div>
+
+</div> -->

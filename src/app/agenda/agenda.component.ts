@@ -5,7 +5,7 @@ import { AgendaDataSource, IPerson } from '../shared';
 
 @Component({
   templateUrl: './agenda.component.html',
-  styleUrls: ['./agenda.component.css'],
+  styles: [],
 })
 export class AgendaComponent implements OnInit {
   persons: IPerson[] = [];

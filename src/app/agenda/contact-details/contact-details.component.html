@@ -21,10 +21,10 @@
       <p class="fs-6 mt-3">Date de contact</p>
       <div class="form-group">
         <label for="number">Numărul de telefon</label>
-        <input class="form-control" type="text" name="number" [value]="person.contacts[0].number" disabled>
+        <input class="form-control" type="text" name="number" [value]="person.contacts.number" disabled>
         <label for="type">Tipul</label>
         <select class="form-control" name="type" disabled>
-          <option selected>{{person.contacts[0].type}}</option>
+          <option selected>{{person.contacts.type}}</option>
         </select>
       </div>
     </fieldset>
@@ -36,23 +36,22 @@
           <div class="row">
             <div class="col">
               <label for="country">Localitate</label>
-              <input class="form-control" type="text" name="country" [value]="person.addresses[0].location.country"
+              <input class="form-control" type="text" name="country" [value]="person.addresses.location.country"
                 disabled>
             </div>
             <div class="col">
               <label for="city">Oraș</label>
-              <input class="form-control" type="text" name="city" [value]="person.addresses[0].location.city" disabled>
+              <input class="form-control" type="text" name="city" [value]="person.addresses.location.city" disabled>
             </div>
             <div class="col">
               <label for="street">Stradă</label>
-              <input class="form-control" type="text" name="street" [value]="person.addresses[0].location.street"
-                disabled>
+              <input class="form-control" type="text" name="street" [value]="person.addresses.location.street" disabled>
             </div>
           </div>
         </fieldset>
         <label for="type">Tipul</label>
         <select class="form-control" name="type" disabled>
-          <option selected>{{person.addresses[0].type}}</option>
+          <option selected>{{person.addresses.type}}</option>
         </select>
       </div>
     </fieldset>

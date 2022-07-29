@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgCloneDeepService } from 'ng-clone-deep';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, fromEventPattern } from 'rxjs';
 import Swal from 'sweetalert2';
 import { IPerson } from './agenda-data.model';
 
@@ -24,9 +24,11 @@ export class AgendaDataSource {
     const index = PERSONS.length - 1
     let id = PERSONS[index].id + 1
     formValues.id = id
+    if(formValues.date)
     formValues.date = new Date(formValues.date)
     PERSONS.push(formValues)
     this.subject.next(PERSONS);
+    return id
   }
 
   updatePerson(formValues: any) {
@@ -84,17 +86,13 @@ const PERSONS: IPerson[] = [
     firstname: 'Gaina',
     lastname: 'Ionut',
     date: new Date('2022-10-30'),
-    contacts: [
+    contacts:
       {
         number: '0751911116',
         type: 'Personal',
       },
-      {
-        number: '024341181',
-        type: 'Acasă',
-      },
-    ],
-    addresses: [
+
+    addresses:
       {
         location: {
           street: 'Str. Pădurilor 12',
@@ -103,15 +101,6 @@ const PERSONS: IPerson[] = [
         },
         type: 'Acasă',
       },
-      {
-        location: {
-          street: 'Str. Independenței 290',
-          city: 'București',
-          country: 'România',
-        },
-        type: 'Serviciu',
-      },
-    ],
     notes: '',
   },
   {
@@ -119,17 +108,13 @@ const PERSONS: IPerson[] = [
     firstname: 'Ardei',
     lastname: 'AVasile',
     date: new Date('2022-10-30'),
-    contacts: [
+    contacts:
       {
         number: '075532116',
         type: 'Personal',
       },
-      {
-        number: '024321331',
-        type: 'Acasă',
-      },
-    ],
-    addresses: [
+
+    addresses:
       {
         location: {
           street: 'Str. Pădurilor 12',
@@ -138,15 +123,6 @@ const PERSONS: IPerson[] = [
         },
         type: 'Acasă',
       },
-      {
-        location: {
-          street: 'Str. Independenței 290',
-          city: 'București',
-          country: 'România',
-        },
-        type: 'Serviciu',
-      },
-    ],
     notes: 'fdsaf',
   },
   {
@@ -154,17 +130,12 @@ const PERSONS: IPerson[] = [
     firstname: 'Petrusca',
     lastname: 'Adrian',
     date: new Date('2022-10-30'),
-    contacts: [
-      {
-        number: '0751911116',
-        type: 'Personal',
-      },
+    contacts:
       {
         number: '024341181',
         type: 'Acasă',
       },
-    ],
-    addresses: [
+    addresses:
       {
         location: {
           street: 'Str. Pădurilor 12',
@@ -173,15 +144,6 @@ const PERSONS: IPerson[] = [
         },
         type: 'Acasă',
       },
-      {
-        location: {
-          street: 'Str. Independenței 290',
-          city: 'București',
-          country: 'România',
-        },
-        type: 'Serviciu',
-      },
-    ],
     notes: 'fsafsfsaf',
   },
 ];

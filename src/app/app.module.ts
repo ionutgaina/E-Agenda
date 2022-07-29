@@ -11,6 +11,7 @@ import { ContactThumbnailComponent } from './agenda/contact-thumbnail/contact-th
 import { ContactDetailsComponent } from './agenda/contact-details/contact-details.component';
 import { CreateContactComponent } from './agenda/create-contact/create-contact.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ContactUpdateComponent } from './agenda/contact-update/contact-update.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ContactThumbnailComponent,
     ContactDetailsComponent,
     CreateContactComponent,
+    ContactUpdateComponent,
   ],
   imports: [
     BrowserModule,

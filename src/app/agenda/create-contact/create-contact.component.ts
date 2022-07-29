@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AgendaDataSource, IPerson } from 'src/app/shared';
 import Swal from 'sweetalert2';
@@ -19,18 +19,18 @@ export class CreateContactComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.personForm = this.formBuilder.group({
-      firstname: [''],
-      lastname: [''],
+      firstname: ['', [Validators.pattern("^[a-zA-Z'-]+$"), Validators.maxLength(15), Validators.required]],
+      lastname: ['', [Validators.pattern("^[a-z'-]+$"), Validators.maxLength(15), Validators.required]],
       date: [''],
       contacts: this.formBuilder.group({
-        number: [''],
+        number: ['', [Validators.pattern("^[+ 0-9]{9-12}$")]],
         type: [''],
       }),
       addresses: this.formBuilder.group({
         location: this.formBuilder.group({
-          street: [''],
-          city: [''],
-          country: [''],
+          street: ['', [Validators.pattern("^[a-zA-Z'-]+$")]],
+          city: ['', [Validators.pattern("^[a-zA-Z-]+$")]],
+          country: ['', [Validators.pattern("^[a-zA-Z]+$")]],
         }),
         type: [''],
       }),
@@ -54,32 +54,23 @@ export class CreateContactComponent implements OnInit {
     return this.personForm.get('contacts').get('number');
   }
 
-  get type() {
-    return this.personForm.get('contacts').get('type');
-  }
-
   get country() {
-    return this.personForm.get('locations').get('country');
+    return this.personForm.get('addresses').get('location').get('country');
   }
-
-  get street() {
-    return this.personForm.get('contacts').get('street');
-  }
-
   get city() {
-    return this.personForm.get('contacts').get('city');
+    return this.personForm.get('addresses').get('location').get('city');
+  }
+  get street() {
+    return this.personForm.get('addresses').get('location').get('street');
   }
 
-  get notes() {
-    return this.personForm.get('date');
-  }
 
   ngOnInit(): void {}
 
   savePerson() {
     const formValues = this.personForm.value;
     console.log(formValues);
-    this.agendaService.createPerson(formValues);
+    let id = this.agendaService.createPerson(formValues);
     Swal.fire({
       icon: 'success',
       title: 'Ai creat cu succes contactul',
@@ -87,7 +78,7 @@ export class CreateContactComponent implements OnInit {
       showConfirmButton: false,
       timer: 1500
     }).then(() => {
-        this.router.navigate(['/agenda']);
+        this.router.navigate(['/agenda', id]);
     })
   }
   cancel() {
