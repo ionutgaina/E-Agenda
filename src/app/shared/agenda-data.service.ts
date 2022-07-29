@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NgCloneDeepService } from 'ng-clone-deep';
 import { BehaviorSubject } from 'rxjs';
+import Swal from 'sweetalert2';
 import { IPerson } from './agenda-data.model';
 
 @Injectable({
@@ -19,9 +20,18 @@ export class AgendaDataSource {
     return PERSONS.filter((person) => person.id === id)[0];
   }
 
-  createPerson(formValues: any) {}
+  createPerson(formValues: any) {
+    const index = PERSONS.length - 1
+    let id = PERSONS[index].id + 1
+    formValues.id = id
+    formValues.date = new Date(formValues.date)
+    PERSONS.push(formValues)
+    this.subject.next(PERSONS);
+  }
 
-  updatePerson(formValues: any) {}
+  updatePerson(formValues: any) {
+
+  }
 
   deletePerson(id: number) {
     let index = PERSONS.findIndex((person) => person.id === id);
@@ -73,7 +83,7 @@ const PERSONS: IPerson[] = [
     id: 1,
     firstname: 'Gaina',
     lastname: 'Ionut',
-    date: new Date('5/30/2001'),
+    date: new Date('2022-10-30'),
     contacts: [
       {
         number: '0751911116',
@@ -105,10 +115,10 @@ const PERSONS: IPerson[] = [
     notes: '',
   },
   {
-    id: 3,
+    id: 2,
     firstname: 'Ardei',
     lastname: 'AVasile',
-    date: new Date('5/32/2023'),
+    date: new Date('2022-10-30'),
     contacts: [
       {
         number: '075532116',
@@ -137,13 +147,13 @@ const PERSONS: IPerson[] = [
         type: 'Serviciu',
       },
     ],
-    notes: '',
+    notes: 'fdsaf',
   },
   {
-    id: 2,
+    id: 3,
     firstname: 'Petrusca',
     lastname: 'Adrian',
-    date: new Date('5/30/2001'),
+    date: new Date('2022-10-30'),
     contacts: [
       {
         number: '0751911116',
@@ -172,6 +182,6 @@ const PERSONS: IPerson[] = [
         type: 'Serviciu',
       },
     ],
-    notes: '',
+    notes: 'fsafsfsaf',
   },
 ];

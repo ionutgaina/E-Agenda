@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AgendaDataSource, IPerson } from 'src/app/shared';
@@ -8,8 +8,6 @@ import { AgendaDataSource, IPerson } from 'src/app/shared';
   styleUrls: ['./contact-details.component.css'],
 })
 export class ContactDetailsComponent implements OnInit {
-  @Output() target  = new EventEmitter<number>();
-
   person: IPerson | undefined;
   subscription: Subscription | undefined;
 
@@ -23,7 +21,6 @@ export class ContactDetailsComponent implements OnInit {
     this.subscription = this.route.params.subscribe((params) => {
       const id = +params['id'];
       this.person = this.agendaService.getPerson(id);
-      this.target.emit(id);
     });
   }
 
@@ -31,7 +28,16 @@ export class ContactDetailsComponent implements OnInit {
     this.subscription?.unsubscribe();
   }
 
-
+  formatDate(date: Date) {
+    function padTo2Digits(num: number) {
+      return num.toString().padStart(2, '0');
+    }
+    return [
+      date.getFullYear(),
+      padTo2Digits(date.getMonth() + 1),
+      padTo2Digits(date.getDate()),
+    ].join('-');
+  }
 
   removeContact(id: number) {
     if (

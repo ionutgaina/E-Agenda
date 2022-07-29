@@ -19,7 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     Error404Component,
     ContactThumbnailComponent,
     ContactDetailsComponent,
-    CreateContactComponent
+    CreateContactComponent,
   ],
   imports: [
     BrowserModule,

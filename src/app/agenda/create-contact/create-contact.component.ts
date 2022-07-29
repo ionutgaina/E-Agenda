@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AgendaDataSource, IPerson } from 'src/app/shared';
+import Swal from 'sweetalert2';
 
 @Component({
   templateUrl: './create-contact.component.html',
@@ -78,8 +79,16 @@ export class CreateContactComponent implements OnInit {
   savePerson() {
     const formValues = this.personForm.value;
     console.log(formValues);
-    // this.agendaService.createPerson(formValues);
-    // this.router.navigate(['/agenda']);
+    this.agendaService.createPerson(formValues);
+    Swal.fire({
+      icon: 'success',
+      title: 'Ai creat cu succes contactul',
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 1500
+    }).then(() => {
+        this.router.navigate(['/agenda']);
+    })
   }
   cancel() {
     this.router.navigate(['/agenda']);

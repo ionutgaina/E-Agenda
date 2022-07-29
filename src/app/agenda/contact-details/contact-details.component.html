@@ -1,4 +1,71 @@
-<div *ngIf="person" >
-  <p>afisez {{person.firstname}} {{person.lastname}}</p>
-  <button class="btn btn-danger" (click)="removeContact(person.id)">STERGE</button>
+<div *ngIf="person">
+  <p class="fs-3 text-center">Detalii contact</p>
+
+  <form>
+    <div class="form-group">
+      <label for="firstname">Nume</label>
+      <input class="form-control" type="text" name="firstname" [value]="person.firstname" disabled>
+    </div>
+
+    <div class="form-group">
+      <label for="lastname">Prenume</label>
+      <input class="form-control" type="text" name="lastname" [value]="person.lastname" disabled>
+    </div>
+
+    <div class="form-group">
+      <label for="date">Data nașterii</label>
+      <input class="form-control" type="date" name="date" [value]="formatDate(person.date)" disabled>
+    </div>
+
+    <fieldset>
+      <p class="fs-6 mt-3">Date de contact</p>
+      <div class="form-group">
+        <label for="number">Numărul de telefon</label>
+        <input class="form-control" type="text" name="number" [value]="person.contacts[0].number" disabled>
+        <label for="type">Tipul</label>
+        <select class="form-control" name="type" disabled>
+          <option selected>{{person.contacts[0].type}}</option>
+        </select>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <p class="fs-6 mt-3">Adrese</p>
+      <div class="form-group">
+        <fieldset>
+          <div class="row">
+            <div class="col">
+              <label for="country">Localitate</label>
+              <input class="form-control" type="text" name="country" [value]="person.addresses[0].location.country"
+                disabled>
+            </div>
+            <div class="col">
+              <label for="city">Oraș</label>
+              <input class="form-control" type="text" name="city" [value]="person.addresses[0].location.city" disabled>
+            </div>
+            <div class="col">
+              <label for="street">Stradă</label>
+              <input class="form-control" type="text" name="street" [value]="person.addresses[0].location.street"
+                disabled>
+            </div>
+          </div>
+        </fieldset>
+        <label for="type">Tipul</label>
+        <select class="form-control" name="type" disabled>
+          <option selected>{{person.addresses[0].type}}</option>
+        </select>
+      </div>
+    </fieldset>
+
+    <div class="form-group">
+      <label for="notes">Notițe</label>
+      <textarea class="form-control" rows="3" name="notes" [value]="person.notes" disabled></textarea>
+    </div>
+
+    <div class="d-flex justify-content-around p-3">
+      <button class="btn btn-danger" (click)="removeContact(person.id)">STERGE</button>
+      <button class="btn btn-warning" (click)="removeContact(person.id)">UPDATE</button>
+    </div>
+  </form>
+
 </div>
