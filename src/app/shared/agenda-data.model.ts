@@ -3,8 +3,8 @@ export interface IPerson {
   firstname: string;
   lastname: string;
   date: string;
-  contacts: IContact;
-  addresses: IAddress;
+  contacts: IContact[];
+  addresses: IAddress[];
   notes: string;
 }
 

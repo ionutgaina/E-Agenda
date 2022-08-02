@@ -35,7 +35,7 @@ export class AgendaFormsService {
         ],
         type: [person.contacts?.type || ''],
       }),
-      addresses: this.formBuilder.group({
+      addresses: this.formBuilder.array([this.formBuilder.group({
         location: this.formBuilder.group({
           street: [
             person.addresses?.location?.street || '',
@@ -51,8 +51,29 @@ export class AgendaFormsService {
           ],
         }),
         type: [person.addresses?.type || ''],
-      }),
+      })]),
       notes: [person.notes || ''],
     });
+  }
+
+  addressForm(street: string, city: string, country: string, type: string)
+  {
+    return this.formBuilder.group({
+      location: this.formBuilder.group({
+        street: [
+          street || '',
+          [Validators.pattern("^[a-z .0-9A-Z'-]+$")],
+        ],
+        city: [
+          city || '',
+          [Validators.pattern('^[a-z A-Z-]+$')],
+        ],
+        country: [
+          country || '',
+          [Validators.pattern('^[a-z A-Z]+$')],
+        ],
+      }),
+      type: [type || ''],
+    })
   }
 }

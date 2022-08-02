@@ -48,19 +48,35 @@ const PERSONS: IPerson[] = [
     firstname: 'Gaina',
     lastname: 'Ionut',
     date: '2015-12-13',
-    contacts: {
-      number: '0751911116',
-      type: 'Personal',
-    },
-
-    addresses: {
-      location: {
-        street: 'Str. Padurilor 12',
-        city: 'Salcuta',
-        country: 'Republica Moldova',
+    contacts: [
+      {
+        number: '0751911116',
+        type: 'Personal',
       },
-      type: 'Acasă',
-    },
+      {
+        number: '0751955553',
+        type: 'Acasă',
+      },
+    ],
+
+    addresses: [
+      {
+        location: {
+          street: 'Str. Padurilor 12',
+          city: 'Salcuta',
+          country: 'Republica Moldova',
+        },
+        type: 'Acasă',
+      },
+      {
+        location: {
+          street: 'Str. Padurilor 12',
+          city: 'Salcuta',
+          country: 'Republica Moldova',
+        },
+        type: 'Acasă',
+      },
+    ],
     notes: '',
   },
   {
@@ -68,19 +84,35 @@ const PERSONS: IPerson[] = [
     firstname: 'Ardei',
     lastname: 'AVasile',
     date: '2030-07-30',
-    contacts: {
-      number: '075532116',
-      type: 'Personal',
-    },
-
-    addresses: {
-      location: {
-        street: 'Str. Padurilor 12',
-        city: 'Salcuta',
-        country: 'Republica Moldova',
+    contacts: [
+      {
+        number: '0751911116',
+        type: 'Personal',
       },
-      type: 'Acasă',
-    },
+      {
+        number: '0751955553',
+        type: 'Acasă',
+      },
+    ],
+
+    addresses: [
+      {
+        location: {
+          street: 'Str. Padurilor 12',
+          city: 'Salcuta',
+          country: 'Republica Moldova',
+        },
+        type: 'Acasă',
+      },
+      {
+        location: {
+          street: 'Str. Padurilor 12',
+          city: 'Salcuta',
+          country: 'Republica Moldova',
+        },
+        type: 'Acasă',
+      },
+    ],
     notes: 'fdsaf',
   },
   {
@@ -88,18 +120,35 @@ const PERSONS: IPerson[] = [
     firstname: 'Petrusca',
     lastname: 'Adrian',
     date: '',
-    contacts: {
-      number: '024341181',
-      type: 'Acasă',
-    },
-    addresses: {
-      location: {
-        street: 'Str. Padurilor 12',
-        city: 'Salcuța',
-        country: 'Republica Moldova',
+    contacts: [
+      {
+        number: '0751911116',
+        type: 'Personal',
       },
-      type: 'Acasă',
-    },
+      {
+        number: '0751955553',
+        type: 'Acasă',
+      },
+    ],
+
+    addresses: [
+      {
+        location: {
+          street: 'Str. Padurilor 12',
+          city: 'Salcuta',
+          country: 'Republica Moldova',
+        },
+        type: 'Acasă',
+      },
+      {
+        location: {
+          street: 'Str. Padurilor 12',
+          city: 'Salcuta',
+          country: 'Republica Moldova',
+        },
+        type: 'Acasă',
+      },
+    ],
     notes: 'fsafsfsaf',
   },
 ];

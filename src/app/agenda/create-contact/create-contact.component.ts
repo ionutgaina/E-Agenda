@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AgendaDataSource } from 'src/app/shared/agenda-data.service';
 import { AgendaFormsService } from 'src/app/shared/agenda-forms.service';
@@ -20,6 +21,8 @@ export class CreateContactComponent implements OnInit {
   ) {
     this.personForm = this.agendaFormsService.personForm({});
   }
+
+  ngOnInit(): void {console.log(this.addresses)}
 
   get firstname() {
     return this.personForm.get('firstname');
@@ -47,7 +50,18 @@ export class CreateContactComponent implements OnInit {
     return this.personForm.get('addresses').get('location').get('street');
   }
 
-  ngOnInit(): void {}
+  get addresses() {
+    return this.personForm.controls['lessons'] as FormArray;
+  }
+
+  addAddress() {
+    let addressForm = this.agendaFormsService.addressForm('', '', '', '');
+    this.addresses.push(addressForm);
+  }
+
+  deleteLesson(lessonIndex: number) {
+    this.addresses.removeAt(lessonIndex);
+  }
 
   savePerson() {
     const formValues = this.personForm.value;
