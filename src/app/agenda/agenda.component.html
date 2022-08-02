@@ -1,9 +1,9 @@
 <div class="text-center border-bottom border-dark p-1">
   <h1>Agenda ta electronică</h1>
 </div>
-<div class="container-fluid mt-5">
+<div class="container overflow-hidden mt-5">
   <div class="row d-flex justify-content-around">
-    <div class="col-md-6 col-sm-12 mb-5" style="width: 400px;">
+    <div class="col-md-6 col-sm-12 mb-5" style="width: 300px;">
 
       <div class="d-flex justify-sm-content-center row">
         <!-- Create button -->
@@ -15,7 +15,7 @@
         <div class="row mb-1">
           <button (click)="options = !options" class="btn btn-secondary w-100">Opțiuni persoane</button>
         </div>
-        <div *ngIf="options" class="col-md-6 w-md-50 p-3">
+        <div *ngIf="options" class="col-md-12 mt-3">
           <!-- search input -->
           <div class="input-group col-md-12 mb-3">
             <input class="form-control" type="text" placeholder="Caută" (keyup)="search($event)">
@@ -23,7 +23,7 @@
 
           <!-- sort input -->
           <div class="row">
-            <div class="input-group mb-3">
+            <div class="input-group">
               <span class="input-group-text" for="selectSort">Sortează</span>
 
               <select (change)="sortHandler($event)" class="form-control" id="selectSort">
@@ -39,14 +39,21 @@
         </div>
 
       </div>
-      <div *ngFor="let item of sortedPersons" class="row">
-        <ul class="list-group">
-          <contact-thumbnail [person]="item"></contact-thumbnail>
-        </ul>
+      <div *ngFor="let key of groupKeys">
+        <div class="text-start fw-bold fs-5 mt-3">
+          {{key}}
+        </div>
+        <div *ngFor="let item of groupedPersons[key]" class="row">
+          <ul class="list-group">
+            <contact-thumbnail [person]="item"></contact-thumbnail>
+          </ul>
+        </div>
+
       </div>
     </div>
 
-    <div class="col-md-6 col-sm-12">
+
+    <div class="col-md-6 col-sm-12 p-3">
       <router-outlet></router-outlet>
     </div>
   </div>

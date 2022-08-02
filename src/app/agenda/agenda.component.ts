@@ -7,7 +7,16 @@ import { AgendaFiltersService } from '../shared/agenda-filters.service';
 
 @Component({
   templateUrl: './agenda.component.html',
-  styles: [],
+  styles: [
+    `
+      .container {
+        --bs-gutter-x: 0 !important;
+      }
+      .row {
+        --bs-gutter-x: 0 !important;
+      }
+    `,
+  ],
 })
 export class AgendaComponent implements OnInit {
   persons: IPerson[] = [];
@@ -16,8 +25,9 @@ export class AgendaComponent implements OnInit {
   subscription: Subscription | undefined;
   searchTerm: string = '';
   foundedPersons: IPerson[] = [];
-  sortedPersons: IPerson[] = [];
+  groupedPersons: any = {};
   sortingTerm: string = '';
+  groupKeys: string[] = [];
 
   constructor(
     private agendaService: AgendaDataSource,
@@ -29,7 +39,8 @@ export class AgendaComponent implements OnInit {
     this.subscription = this.agendaService.getList().subscribe((data) => {
       this.persons = data;
       this.foundedPersons = this.searchPersons();
-      this.sortedPersons = this.sortValue();
+      this.groupedPersons = this.sortValue();
+      this.groupKeys = Object.keys(this.groupedPersons);
     });
   }
 
@@ -50,12 +61,22 @@ export class AgendaComponent implements OnInit {
     let resultGroup: any;
     switch (this.sortingTerm) {
       case 'firstname':
-        resultSort = this.agendaFiltersService.sortByFirstName(this.foundedPersons);
-        resultGroup = this.agendaFiltersService.groupByFirstLetter(resultSort, 'firstname');
+        resultSort = this.agendaFiltersService.sortByFirstName(
+          this.foundedPersons
+        );
+        resultGroup = this.agendaFiltersService.groupByFirstLetter(
+          resultSort,
+          'firstname'
+        );
         break;
       case 'lastname':
-        resultSort = this.agendaFiltersService.sortByLastName(this.foundedPersons);
-        resultGroup = this.agendaFiltersService.groupByFirstLetter(resultSort, 'lastname');
+        resultSort = this.agendaFiltersService.sortByLastName(
+          this.foundedPersons
+        );
+        resultGroup = this.agendaFiltersService.groupByFirstLetter(
+          resultSort,
+          'lastname'
+        );
         break;
       case 'age':
         resultSort = this.agendaFiltersService.sortByAge(this.foundedPersons);
@@ -63,23 +84,25 @@ export class AgendaComponent implements OnInit {
         break;
       case 'date':
         resultSort = this.agendaFiltersService.sortByDate(this.foundedPersons);
-        resultGroup = this.agendaFiltersService.groupByDate(resultSort)
+        resultGroup = this.agendaFiltersService.groupByDate(resultSort);
         break;
       default:
         resultSort = this.foundedPersons;
         resultGroup = this.agendaFiltersService.groupByDefault(resultSort);
     }
-    return resultSort;
+    return resultGroup;
   }
 
   sortHandler(event: any) {
     this.sortingTerm = event.target.value;
-    this.sortedPersons = this.sortValue();
+    this.groupedPersons = this.sortValue();
+    this.groupKeys = Object.keys(this.groupedPersons);
   }
 
   search(event: any) {
     this.searchTerm = event.target.value;
     this.foundedPersons = this.searchPersons();
-    this.sortedPersons = this.sortValue();
+    this.groupedPersons = this.sortValue();
+    this.groupKeys = Object.keys(this.groupedPersons);
   }
 }

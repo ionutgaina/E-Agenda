@@ -57,7 +57,6 @@ export class AgendaFiltersService {
     let result: any = {};
 
     if (property !== 'firstname' && property !== 'lastname') return result;
-    console.log(property);
 
     persons.forEach((person) => {
       const firstLetter = Array.from(person[property])[0];
@@ -66,7 +65,6 @@ export class AgendaFiltersService {
       }
       result[firstLetter].push(person);
     });
-    console.log(result)
     return result;
   }
 
@@ -98,13 +96,13 @@ export class AgendaFiltersService {
       result[ageGroup].push(person);
     });
 
-    console.log(result);
     return result;
   }
 
   groupByDate(persons: IPerson[]) {
     let result: any = {};
     const months = [
+      'Necunoscut',
       'Ianuarie',
       'Februarie',
       'Martie',
@@ -117,15 +115,14 @@ export class AgendaFiltersService {
       'Octombrie',
       'Noiembrie',
       'Decembrie',
-      'Necunoscut',
     ];
 
     for (let i = 0; i < months.length; i++) {
       persons.forEach((person) => {
         const birthDate = new Date(person.date);
-        let birthMonth = birthDate.getMonth();
+        let birthMonth = birthDate.getMonth() + 1;
 
-        !person.date ? (birthMonth = 12) : null;
+        !person.date ? (birthMonth = 0) : null;
 
         if (birthMonth === i) {
           let dateGroup = months[birthMonth];
@@ -137,7 +134,6 @@ export class AgendaFiltersService {
         }
       });
     }
-    console.log(result);
     return result;
   }
 
@@ -150,7 +146,6 @@ export class AgendaFiltersService {
       }
       result[''].push(person);
     });
-    console.log(result);
     return result;
   }
 }
