@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IPerson } from 'src/app/shared/agenda-data.model';
 import { AgendaDataSource } from 'src/app/shared/agenda-data.service';
-import { AgendaFormattingService } from 'src/app/shared/agenda-formatting.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -22,8 +21,7 @@ export class ContactDetailsComponent implements OnInit {
   constructor(
     private agendaService: AgendaDataSource,
     private route: ActivatedRoute,
-    private router: Router,
-    private agendaFormattingService: AgendaFormattingService
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.subscription = this.route.params.subscribe((params) => {
@@ -34,10 +32,6 @@ export class ContactDetailsComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscription?.unsubscribe();
-  }
-
-  formatDate(date: Date) {
-    return this.agendaFormattingService.formatDate(date);
   }
 
   updateHandler() {

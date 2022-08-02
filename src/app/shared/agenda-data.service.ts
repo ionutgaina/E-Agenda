@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { NgCloneDeepService } from 'ng-clone-deep';
 import { BehaviorSubject } from 'rxjs';
 import { IPerson } from './agenda-data.model';
 @Injectable({
@@ -8,7 +7,7 @@ import { IPerson } from './agenda-data.model';
 export class AgendaDataSource {
   subject = new BehaviorSubject(PERSONS);
 
-  constructor(private cloneDeep: NgCloneDeepService) {}
+  constructor() {}
 
   getList() {
     return this.subject;
@@ -22,9 +21,6 @@ export class AgendaDataSource {
     const index = PERSONS.length - 1;
     let id = PERSONS[index].id + 1;
     formValues.id = id;
-    if (formValues.date) {
-      formValues.date = new Date(formValues.date);
-    }
 
     PERSONS.push(formValues);
     this.subject.next(PERSONS);
@@ -53,7 +49,7 @@ const PERSONS: IPerson[] = [
     id: 1,
     firstname: 'Gaina',
     lastname: 'Ionut',
-    date: new Date('2022-10-30'),
+    date: '2015-12-13',
     contacts: {
       number: '0751911116',
       type: 'Personal',
@@ -73,7 +69,7 @@ const PERSONS: IPerson[] = [
     id: 2,
     firstname: 'Ardei',
     lastname: 'AVasile',
-    date: new Date('2022-10-30'),
+    date: '2030-07-30',
     contacts: {
       number: '075532116',
       type: 'Personal',
@@ -93,7 +89,7 @@ const PERSONS: IPerson[] = [
     id: 3,
     firstname: 'Petrusca',
     lastname: 'Adrian',
-    date: new Date('2022-10-30'),
+    date: '',
     contacts: {
       number: '024341181',
       type: 'Acasă',

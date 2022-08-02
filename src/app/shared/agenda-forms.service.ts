@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { IPerson } from './agenda-data.model';
-import { AgendaFormattingService } from './agenda-formatting.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +7,6 @@ import { AgendaFormattingService } from './agenda-formatting.service';
 export class AgendaFormsService {
   constructor(
     private formBuilder: FormBuilder,
-    private agendaFormatiing: AgendaFormattingService
   ) {}
 
   personForm(person: any) {
@@ -30,7 +27,7 @@ export class AgendaFormsService {
           Validators.required,
         ],
       ],
-      date: [this.agendaFormatiing.formatDate(person.date) || ''],
+      date: [person.date || ''],
       contacts: this.formBuilder.group({
         number: [
           person.contacts?.number || '',

@@ -2,7 +2,7 @@ export interface IPerson {
   id: number;
   firstname: string;
   lastname: string;
-  date: Date;
+  date: string;
   contacts: IContact;
   addresses: IAddress;
   notes: string;

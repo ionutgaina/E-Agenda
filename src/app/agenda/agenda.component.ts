@@ -46,21 +46,30 @@ export class AgendaComponent implements OnInit {
   }
 
   sortValue() {
-    let result: IPerson[] = [];
+    let resultSort: IPerson[] = [];
+    let resultGroup: any;
     switch (this.sortingTerm) {
       case 'firstname':
-        result = this.agendaFiltersService.sortByFirstName(this.foundedPersons);
+        resultSort = this.agendaFiltersService.sortByFirstName(this.foundedPersons);
+        resultGroup = this.agendaFiltersService.groupByFirstLetter(resultSort, 'firstname');
         break;
       case 'lastname':
-        result = this.agendaFiltersService.sortByLastName(this.foundedPersons);
+        resultSort = this.agendaFiltersService.sortByLastName(this.foundedPersons);
+        resultGroup = this.agendaFiltersService.groupByFirstLetter(resultSort, 'lastname');
         break;
-      case 'age' || 'date':
-        result = this.agendaFiltersService.sortByAge(this.foundedPersons);
+      case 'age':
+        resultSort = this.agendaFiltersService.sortByAge(this.foundedPersons);
+        resultGroup = this.agendaFiltersService.groupByAge(resultSort);
+        break;
+      case 'date':
+        resultSort = this.agendaFiltersService.sortByDate(this.foundedPersons);
+        resultGroup = this.agendaFiltersService.groupByDate(resultSort)
         break;
       default:
-        result = this.foundedPersons;
+        resultSort = this.foundedPersons;
+        resultGroup = this.agendaFiltersService.groupByDefault(resultSort);
     }
-    return result;
+    return resultSort;
   }
 
   sortHandler(event: any) {
