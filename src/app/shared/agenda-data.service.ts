@@ -28,8 +28,6 @@ export class AgendaDataSource {
   }
 
   updatePerson(formValues: any) {
-    if (formValues.date) formValues.date = new Date(formValues.date);
-
     let id = formValues.id;
 
     let index = PERSONS.findIndex((person) => person.id === id);
