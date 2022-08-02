@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgCloneDeepService } from 'ng-clone-deep';
 import { Subscription } from 'rxjs';
-import { AgendaDataSource, IPerson } from '../shared';
+import { IPerson } from '../shared/agenda-data.model';
+import { AgendaDataSource } from '../shared/agenda-data.service';
+import { AgendaFiltersService } from '../shared/agenda-filters.service';
 
 @Component({
   templateUrl: './agenda.component.html',
@@ -19,7 +21,8 @@ export class AgendaComponent implements OnInit {
 
   constructor(
     private agendaService: AgendaDataSource,
-    private cloneDeep: NgCloneDeepService
+    private cloneDeep: NgCloneDeepService,
+    private agendaFiltersService: AgendaFiltersService
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +38,7 @@ export class AgendaComponent implements OnInit {
   }
 
   searchPersons() {
-    const result = this.agendaService.searchPersons(
+    const result = this.agendaFiltersService.searchPersons(
       this.searchTerm,
       this.cloneDeep.clone(this.persons)
     );
@@ -46,13 +49,13 @@ export class AgendaComponent implements OnInit {
     let result: IPerson[] = [];
     switch (this.sortingTerm) {
       case 'firstname':
-        result = this.agendaService.sortByFirstName(this.foundedPersons);
+        result = this.agendaFiltersService.sortByFirstName(this.foundedPersons);
         break;
       case 'lastname':
-        result = this.agendaService.sortByLastName(this.foundedPersons);
+        result = this.agendaFiltersService.sortByLastName(this.foundedPersons);
         break;
       case 'age' || 'date':
-        result = this.agendaService.sortByAge(this.foundedPersons);
+        result = this.agendaFiltersService.sortByAge(this.foundedPersons);
         break;
       default:
         result = this.foundedPersons;

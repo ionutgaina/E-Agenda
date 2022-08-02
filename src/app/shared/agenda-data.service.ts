@@ -46,58 +46,6 @@ export class AgendaDataSource {
     PERSONS.splice(index, 1);
     this.subject.next(PERSONS);
   }
-
-  searchPersons(searchTerm: string, persons: IPerson[]) {
-    let result: IPerson[] = [];
-
-    const copy_persons = this.cloneDeep.clone(persons);
-
-    result = copy_persons.filter((person: IPerson) => {
-      return (
-        person.firstname.toLocaleLowerCase().includes(searchTerm) ||
-        person.lastname.toLocaleLowerCase().includes(searchTerm)
-      );
-    });
-    return result;
-  }
-
-  sortByFirstName(persons: IPerson[]) {
-    let result: IPerson[] = this.cloneDeep.clone(persons);
-    result.sort((a, b) => {
-      return a.firstname >= b.firstname ? 1 : -1;
-    });
-    return result;
-  }
-
-  sortByLastName(persons: IPerson[]) {
-    let result: IPerson[] = this.cloneDeep.clone(persons);
-    result.sort((a, b) => {
-      return a.lastname >= b.lastname ? 1 : -1;
-    });
-    return result;
-  }
-
-  sortByAge(persons: IPerson[]) {
-    let result: IPerson[] = this.cloneDeep.clone(persons);
-    result.sort((a, b) => {
-      return a.date >= b.date ? -1 : 1;
-    });
-    return result;
-  }
-
-  // formating data for input type="date"
-  formatDate(date: Date) {
-    function padTo2Digits(num: number) {
-      return num.toString().padStart(2, '0');
-    }
-    if (date)
-      return [
-        date.getFullYear(),
-        padTo2Digits(date.getMonth() + 1),
-        padTo2Digits(date.getDate()),
-      ].join('-');
-    else return null;
-  }
 }
 
 const PERSONS: IPerson[] = [

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IPerson } from 'src/app/shared';
+import { IPerson } from 'src/app/shared/agenda-data.model';
 
 @Component({
   selector: 'contact-thumbnail',

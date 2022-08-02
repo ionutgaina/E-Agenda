@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AgendaDataSource, IPerson } from 'src/app/shared';
+import { IPerson } from 'src/app/shared/agenda-data.model';
+import { AgendaDataSource } from 'src/app/shared/agenda-data.service';
+import { AgendaFormattingService } from 'src/app/shared/agenda-formatting.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -20,7 +22,8 @@ export class ContactDetailsComponent implements OnInit {
   constructor(
     private agendaService: AgendaDataSource,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private agendaFormattingService: AgendaFormattingService
   ) {}
   ngOnInit(): void {
     this.subscription = this.route.params.subscribe((params) => {
@@ -34,7 +37,7 @@ export class ContactDetailsComponent implements OnInit {
   }
 
   formatDate(date: Date) {
-    return this.agendaService.formatDate(date);
+    return this.agendaFormattingService.formatDate(date);
   }
 
   updateHandler() {

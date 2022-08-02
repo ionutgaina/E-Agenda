@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AgendaDataSource, IPerson } from 'src/app/shared';
+import { IPerson } from 'src/app/shared/agenda-data.model';
+import { AgendaDataSource } from 'src/app/shared/agenda-data.service';
+import { AgendaFormsService } from 'src/app/shared/agenda-forms.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -21,7 +22,7 @@ export class ContactUpdateComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private agendaService: AgendaDataSource,
-    private formBuilder: FormBuilder
+    private agendaFormsService: AgendaFormsService
   ) {}
 
   ngOnInit(): void {
@@ -29,50 +30,7 @@ export class ContactUpdateComponent implements OnInit {
       const id = +params['id'];
       this.person = this.agendaService.getPerson(id);
 
-      this.personForm = this.formBuilder.group({
-        firstname: [
-          this.person.firstname,
-          [
-            Validators.pattern("^[a-zA-Z'-]+$"),
-            Validators.maxLength(15),
-            Validators.required,
-          ],
-        ],
-        lastname: [
-          this.person.lastname,
-          [
-            Validators.pattern("^[a-zA-Z'-]+$"),
-            Validators.maxLength(15),
-            Validators.required,
-          ],
-        ],
-        date: [this.formatDate(this.person.date)],
-        contacts: this.formBuilder.group({
-          number: [
-            this.person.contacts.number,
-            [Validators.pattern('^[+ 0-9]{9,12}$')],
-          ],
-          type: [this.person.contacts.type],
-        }),
-        addresses: this.formBuilder.group({
-          location: this.formBuilder.group({
-            street: [
-              this.person.addresses.location.street,
-              [Validators.pattern("^[a-z .0-9A-Z'-]+$")],
-            ],
-            city: [
-              this.person.addresses.location.city,
-              [Validators.pattern('^[a-z A-Z-]+$')],
-            ],
-            country: [
-              this.person.addresses.location.country,
-              [Validators.pattern('^[a-z A-Z]+$')],
-            ],
-          }),
-          type: [this.person.addresses.type],
-        }),
-        notes: [this.person.notes],
-      });
+      this.personForm = this.agendaFormsService.personForm(this.person);
     });
   }
 
@@ -104,10 +62,6 @@ export class ContactUpdateComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscription?.unsubscribe();
-  }
-
-  formatDate(date: Date) {
-    return this.agendaService.formatDate(date);
   }
 
   updatePerson() {

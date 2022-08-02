@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { AgendaDataSource } from './shared/index';
 import { AgendaComponent } from './agenda/agenda.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
@@ -29,7 +28,6 @@ import { ContactUpdateComponent } from './agenda/contact-update/contact-update.c
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    AgendaDataSource
   ],
   bootstrap: [AppComponent]
 })
