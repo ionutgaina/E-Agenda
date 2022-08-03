@@ -21,7 +21,6 @@ export class AgendaDataSource {
     const index = PERSONS.length - 1;
     let id = PERSONS[index].id + 1;
     formValues.id = id;
-
     PERSONS.push(formValues);
     this.subject.next(PERSONS);
     return id;

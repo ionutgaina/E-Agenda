@@ -64,7 +64,6 @@ export class CreateContactComponent implements OnInit {
 
   savePerson() {
     const formValues = this.personForm.value;
-    console.log(formValues);
     let id = this.agendaService.createPerson(formValues);
     Swal.fire({
       icon: 'success',

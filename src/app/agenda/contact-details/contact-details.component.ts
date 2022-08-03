@@ -69,5 +69,4 @@ export class ContactDetailsComponent implements OnInit {
   decreaseAddressIndex() {
     this.addressIndex--;
   }
-
 }

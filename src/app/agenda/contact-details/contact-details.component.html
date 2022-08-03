@@ -11,12 +11,12 @@
     <input class="form-control" type="text" name="lastname" [value]="person.lastname" disabled>
   </div>
 
-  <div class="form-group">
+  <div *ngIf="person.date" class="form-group">
     <label for="date">Data nașterii</label>
     <input class="form-control" type="date" name="date" [value]="person.date" disabled>
   </div>
 
-  <fieldset>
+  <fieldset *ngIf="person.contacts[0]">
     <p class="fs-6 mt-3">Date de contact</p>
     <!-- Carousell for Contacts -->
     <div class="row fs-3">
@@ -45,7 +45,7 @@
     </div>
   </fieldset>
 
-  <fieldset>
+  <fieldset *ngIf="person.addresses[0]">
     <p class="fs-6 mt-3">Adrese</p>
     <!-- Carousell for Adresses-->
     <div class="row fs-3">
@@ -93,7 +93,7 @@
     </div>
   </fieldset>
 
-  <div class="form-group">
+  <div *ngIf="person.notes" class="form-group">
     <label for="notes">Notițe</label>
     <textarea class="form-control" rows="3" name="notes" [value]="person.notes" disabled></textarea>
   </div>

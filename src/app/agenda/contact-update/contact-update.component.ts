@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IPerson } from 'src/app/shared/agenda-data.model';
@@ -34,6 +35,12 @@ export class ContactUpdateComponent implements OnInit {
     });
   }
 
+
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
+  }
+
   get firstname() {
     return this.personForm.get('firstname');
   }
@@ -46,22 +53,30 @@ export class ContactUpdateComponent implements OnInit {
     return this.personForm.get('date');
   }
 
-  get number() {
-    return this.personForm.get('contacts').get('number');
+  get addresses() {
+    return this.personForm.controls['addresses'] as FormArray;
   }
 
-  get country() {
-    return this.personForm.get('addresses').get('location').get('country');
-  }
-  get city() {
-    return this.personForm.get('addresses').get('location').get('city');
-  }
-  get street() {
-    return this.personForm.get('addresses').get('location').get('street');
+  get contacts() {
+    return this.personForm.controls['contacts'] as FormArray;
   }
 
-  ngOnDestroy() {
-    this.subscription?.unsubscribe();
+  addAddress() {
+    let addressForm = this.agendaFormsService.addressForm('', '', '', '');
+    this.addresses.push(addressForm);
+  }
+
+  deleteAddress(addressIndex: number) {
+    this.addresses.removeAt(addressIndex);
+  }
+
+  addContact() {
+    let contactForm = this.agendaFormsService.contactForm('', '');
+    this.contacts.push(contactForm);
+  }
+
+  deleteContact(contactIndex: number) {
+    this.contacts.removeAt(contactIndex);
   }
 
   updatePerson() {

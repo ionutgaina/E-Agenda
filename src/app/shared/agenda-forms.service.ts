@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +8,7 @@ export class AgendaFormsService {
   constructor(private formBuilder: FormBuilder) {}
 
   personForm(person: any) {
-    return this.formBuilder.group({
+    let myForm: any = this.formBuilder.group({
       firstname: [
         person.firstname || '',
         [
@@ -26,19 +26,26 @@ export class AgendaFormsService {
         ],
       ],
       date: [person.date || ''],
-      contacts: this.formBuilder.array([
-        this.contactForm(person.contacts?.number || '', person.contacts?.type),
-      ]),
-      addresses: this.formBuilder.array([
-        this.addressForm(
-          person.addresses?.location?.street || '',
-          person.addresses?.location?.city || '',
-          person.addresses?.location?.country || '',
-          person.addresses?.type || ''
-        ),
-      ]),
+      contacts: this.formBuilder.array([]),
+      addresses: this.formBuilder.array([]),
       notes: [person.notes || ''],
     });
+
+    for (let contact of person.contacts) {
+      let contactForm = this.contactForm(contact.number, contact.type);
+      myForm.controls['contacts'].push(contactForm);
+    }
+
+    for (let address of person.addresses) {
+      let addressForm = this.addressForm(
+        address.location?.street,
+        address.location?.city,
+        address.location?.country,
+        address.type
+      );
+      myForm.controls['addresses'].push(addressForm);
+    }
+    return myForm;
   }
 
   addressForm(street: string, city: string, country: string, type: string) {
