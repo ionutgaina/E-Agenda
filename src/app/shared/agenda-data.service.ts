@@ -70,11 +70,11 @@ const PERSONS: IPerson[] = [
       },
       {
         location: {
-          street: 'Str. Padurilor 12',
-          city: 'Salcuta',
-          country: 'Republica Moldova',
+          street: 'Str. Padurilor 13',
+          city: 'Salc',
+          country: 'Republica',
         },
-        type: 'Acasă',
+        type: 'Serviciu',
       },
     ],
     notes: '',

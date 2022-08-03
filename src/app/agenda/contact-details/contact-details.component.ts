@@ -13,6 +13,8 @@ export class ContactDetailsComponent implements OnInit {
   person: IPerson | undefined;
   subscription: Subscription | undefined;
   isDisabled = true;
+  contactIndex: number = 0;
+  addressIndex: number = 0;
 
   personForm: any;
   contactsList = ['Personal', 'Serviciu', 'Acasă'];
@@ -53,4 +55,19 @@ export class ContactDetailsComponent implements OnInit {
       }
     });
   }
+
+  increaseContactIndex() {
+    this.contactIndex++;
+  }
+  decreaseContactIndex() {
+    this.contactIndex--;
+  }
+
+  increaseAddressIndex() {
+    this.addressIndex++;
+  }
+  decreaseAddressIndex() {
+    this.addressIndex--;
+  }
+
 }

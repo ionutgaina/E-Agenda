@@ -18,48 +18,78 @@
 
   <fieldset>
     <p class="fs-6 mt-3">Date de contact</p>
-    <!-- folosesc carousell -->
-    <div *ngFor="let contact of person.contacts" class="form-group">
+    <!-- Carousell for Contacts -->
+    <div class="row fs-3">
+      <div class="col d-flex align-items-start flex-column">
+        <i *ngIf="contactIndex > 0" (click)="decreaseContactIndex()" class='fas fa-angle-left '></i>
+      </div>
+      <div class="col d-flex align-items-center flex-column">
+        <p class="fs-4">
+          Contactul nr.{{this.contactIndex + 1}}
+        </p>
+      </div>
+      <div class="col d-flex align-items-end flex-column">
+        <i *ngIf="person.contacts[contactIndex + 1]" (click)="increaseContactIndex()" class='fas fa-angle-right'></i>
+      </div>
+    </div>
+    <!-- END Carousell -->
+
+    <div class="form-group">
       <label for="number">Numărul de telefon</label>
-      <input class="form-control" type="text" name="number" [value]="contact.number" disabled>
+      <input class="form-control" type="text" name="number" [value]="person.contacts[contactIndex].number" disabled>
 
       <label for="type">Tipul</label>
       <select class="form-control" name="type" disabled>
-        <option selected>{{contact.type}}</option>
+        <option selected>{{person.contacts[contactIndex].type}}</option>
       </select>
     </div>
   </fieldset>
 
   <fieldset>
     <p class="fs-6 mt-3">Adrese</p>
-    <div *ngFor="let address of person.addresses" class="form-group">
-      <!-- Carousell -->
+    <!-- Carousell for Adresses-->
+    <div class="row fs-3">
+      <div class="col d-flex align-items-start flex-column">
+        <i *ngIf="addressIndex > 0" (click)="decreaseAddressIndex()" class='fas fa-angle-left '></i>
+      </div>
+      <div class="col d-flex align-items-center flex-column">
+        <p class="fs-4">
+          Adresa nr.{{this.addressIndex + 1}}
+        </p>
+      </div>
+      <div class="col d-flex align-items-end flex-column">
+        <i *ngIf="person.addresses[addressIndex + 1]" (click)="increaseAddressIndex()" class='fas fa-angle-right'></i>
+      </div>
+    </div>
+    <!-- END Carousell -->
+    <div class="form-group">
       <fieldset>
         <div class="row">
 
           <div class="col">
             <label for="country">Localitate</label>
-            <input class="form-control" type="text" name="country" [value]="address.location.country" disabled>
+            <input class="form-control" type="text" name="country"
+              [value]="person.addresses[addressIndex].location.country" disabled>
           </div>
 
           <div class="col">
             <label for="city">Oraș</label>
-            <input class="form-control" type="text" name="city" [value]="address.location.city" disabled>
+            <input class="form-control" type="text" name="city" [value]="person.addresses[addressIndex].location.city"
+              disabled>
           </div>
 
           <div class="col">
             <label for="street">Stradă</label>
-            <input class="form-control" type="text" name="street" [value]="address.location.street" disabled>
+            <input class="form-control" type="text" name="street"
+              [value]="person.addresses[addressIndex].location.street" disabled>
           </div>
-
         </div>
       </fieldset>
 
       <label for="type">Tipul</label>
       <select class="form-control" name="type" disabled>
-        <option selected>{{address.type}}</option>
+        <option selected>{{person.addresses[addressIndex].type}}</option>
       </select>
-
     </div>
   </fieldset>
 
