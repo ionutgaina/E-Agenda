@@ -42,12 +42,23 @@
     <input class="form-control" type="date" id="date" name="date" formControlName="date">
   </div>
 
-  <fieldset formGroupName="contacts">
+  <fieldset formArrayName="contacts">
     <p class="fs-6 mt-3">Date de contact</p>
-    <div class="form-group">
-      <label for="number">Numărul de telefon <em class="text-danger" [hidden]="!number.errors?.pattern">
-          Invalid
-        </em></label>
+    <div *ngFor="let contact of contacts.controls; let idx = index" [formGroupName]="idx" class="form-group">
+      <!-- Title contact -->
+      <div class="row text-center">
+        <p class="fs-5 fw-bold">Contactul {{idx + 1}}</p>
+      </div>
+      <!-- Delete contact button -->
+      <div class="row text-end">
+        <i (click)="deleteContact(idx)" class="fas fa-minus text-danger fs-3"></i>
+      </div>
+
+      <!-- Contact[index] form -->
+      <label for="number">Numărul de telefon
+        <em class="text-danger" [hidden]="!contact.get('number')?.errors?.['pattern']">
+          Caractere permise (+ 0-9)</em>
+      </label>
       <input class="form-control" type="text" id="number" name="number" formControlName="number">
 
       <label for="type">Tipul</label>
@@ -58,27 +69,43 @@
         </option>
       </select>
     </div>
+    <!-- Add button -->
+    <div class="d-flex flex-row-reverse mt-3">
+      <i (click)="addContact()" class="fas fa-plus fs-3 text-success"></i>
+    </div>
   </fieldset>
 
-  <fieldset formGroupName="addresses">
+  <fieldset formArrayName="addresses">
     <p class="fs-6 mt-3">Adrese</p>
-    <div class="form-group">
+    <div *ngFor="let address of addresses.controls; let idx = index" [formGroupName]="idx" class="form-group">
+      <!-- Title address -->
+      <div class="row text-center">
+        <p class="fs-5 fw-bold">Adresa {{idx + 1}}</p>
+      </div>
+      <!-- Delete address button -->
+      <div class="row text-end">
+        <i (click)="deleteAddress(idx)" class="fas fa-minus text-danger fs-3"></i>
+      </div>
+      <!-- Address[index] form -->
       <fieldset formGroupName="location">
         <div class="row">
           <div class="col">
-            <label for="country">Localitate <em class="text-danger" [hidden]="!country.errors?.pattern">
+            <label for="country">Localitate <em class="text-danger"
+                [hidden]="!address.get('location')?.get('country')?.errors?.['pattern']">
                 Invalid
               </em></label>
             <input class="form-control" type="text" id="country" name="country" formControlName="country">
           </div>
           <div class="col">
-            <label for="city">Oraș<em class="text-danger" [hidden]="!city.errors?.pattern">
+            <label for="city">Oraș<em class="text-danger"
+                [hidden]="!address.get('location')?.get('city')?.errors?.['pattern']">
                 Invalid
               </em></label>
             <input class="form-control" type="text" id="city" name="city" formControlName="city">
           </div>
           <div class="col">
-            <label for="street">Stradă<em class="text-danger" [hidden]="!street.errors?.pattern">
+            <label for="street">Stradă<em class="text-danger"
+                [hidden]="!address.get('location')?.get('street')?.errors?.['pattern']">
                 Invalid
               </em></label>
             <input class="form-control" type="text" id="street" name="street" formControlName="street">
@@ -92,6 +119,10 @@
           {{address}}
         </option>
       </select>
+    </div>
+    <!-- Add button -->
+    <div class="d-flex flex-row-reverse mt-3">
+      <i (click)="addAddress()" class="fas fa-plus fs-3 text-success"></i>
     </div>
   </fieldset>
 

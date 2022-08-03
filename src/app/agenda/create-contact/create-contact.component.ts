@@ -22,7 +22,7 @@ export class CreateContactComponent implements OnInit {
     this.personForm = this.agendaFormsService.personForm({});
   }
 
-  ngOnInit(): void {console.log(this.addresses)}
+  ngOnInit(): void {}
 
   get firstname() {
     return this.personForm.get('firstname');
@@ -36,22 +36,12 @@ export class CreateContactComponent implements OnInit {
     return this.personForm.get('date');
   }
 
-  get number() {
-    return this.personForm.get('contacts').get('number');
-  }
-
-  get country() {
-    return this.personForm.get('addresses').get('location').get('country');
-  }
-  get city() {
-    return this.personForm.get('addresses').get('location').get('city');
-  }
-  get street() {
-    return this.personForm.get('addresses').get('location').get('street');
-  }
-
   get addresses() {
-    return this.personForm.controls['lessons'] as FormArray;
+    return this.personForm.controls['addresses'] as FormArray;
+  }
+
+  get contacts() {
+    return this.personForm.controls['contacts'] as FormArray;
   }
 
   addAddress() {
@@ -59,13 +49,22 @@ export class CreateContactComponent implements OnInit {
     this.addresses.push(addressForm);
   }
 
-  deleteLesson(lessonIndex: number) {
-    this.addresses.removeAt(lessonIndex);
+  deleteAddress(addressIndex: number) {
+    this.addresses.removeAt(addressIndex);
+  }
+
+  addContact() {
+    let contactForm = this.agendaFormsService.contactForm('', '');
+    this.contacts.push(contactForm);
+  }
+
+  deleteContact(contactIndex: number) {
+    this.contacts.removeAt(contactIndex);
   }
 
   savePerson() {
     const formValues = this.personForm.value;
-
+    console.log(formValues);
     let id = this.agendaService.createPerson(formValues);
     Swal.fire({
       icon: 'success',
@@ -74,7 +73,7 @@ export class CreateContactComponent implements OnInit {
       showConfirmButton: false,
       timer: 1500,
     }).then(() => {
-      this.router.navigate(['/agenda', id]);
+      // this.router.navigate(['/agenda', id]);
     });
   }
   cancelCreate() {
