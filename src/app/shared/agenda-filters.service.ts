@@ -40,7 +40,9 @@ export class AgendaFiltersService {
   sortByAge(persons: IPerson[]) {
     let result: IPerson[] = this.cloneDeep.clone(persons);
     result.sort((a, b) => {
-      return a.date >= b.date ? -1 : 1;
+      let date_a = new Date(a.date);
+      let date_b = new Date(b.date);
+      return date_a >= date_b ? -1 : 1;
     });
     return result;
   }
@@ -48,7 +50,9 @@ export class AgendaFiltersService {
   sortByDate(persons: IPerson[]) {
     let result: IPerson[] = this.cloneDeep.clone(persons);
     result.sort((a, b) => {
-      return a.date >= b.date ? 1 : -1;
+      let date_a = new Date(a.date);
+      let date_b = new Date(b.date);
+      return date_a >= date_b ? 1 : -1;
     });
     return result;
   }
