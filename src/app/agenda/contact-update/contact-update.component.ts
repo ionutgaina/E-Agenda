@@ -15,6 +15,7 @@ export class ContactUpdateComponent implements OnInit {
   subscription: Subscription | undefined;
   personForm: any;
   person: IPerson | undefined;
+  isSubmit: boolean = false;
 
   contactsList = ['Personal', 'Serviciu', 'Acasă'];
   addressesList = ['Serviciu', 'Acasă'];
@@ -34,11 +35,9 @@ export class ContactUpdateComponent implements OnInit {
 
       this.personForm = this.agendaFormsService.personForm(this.person);
 
-      this.namesValidator()
+      this.namesValidator();
     });
   }
-
-
 
   ngOnDestroy() {
     this.subscription?.unsubscribe();
@@ -86,6 +85,7 @@ export class ContactUpdateComponent implements OnInit {
     const formValues = this.personForm.value;
     formValues.id = this.person?.id;
     this.agendaService.updatePerson(formValues);
+    this.isSubmit = true;
 
     Swal.fire({
       icon: 'success',
@@ -99,19 +99,7 @@ export class ContactUpdateComponent implements OnInit {
   }
 
   cancelUpdate() {
-    Swal.fire({
-      title:
-        'Datele introduse nu vor fi modificate. Ești sigur că vrei să ieși?',
-      showDenyButton: true,
-      confirmButtonText: 'Da',
-      confirmButtonColor: 'red',
-      denyButtonText: 'Renunță',
-      denyButtonColor: 'green',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.router.navigate(['/agenda/' + this.person?.id]);
-      }
-    });
+    this.router.navigate(['/agenda/' + this.person?.id]);
   }
 
   namesValidator() {

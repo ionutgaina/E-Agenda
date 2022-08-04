@@ -3,18 +3,18 @@
 
   <div class="form-group">
     <label for="firstname">Nume</label>
-    <input (input)="namesValidator()" class="form-control" type="text" id="firstname" name="firstname" formControlName="firstname">
+    <input (input)="namesValidator()" class="form-control" type="text" id="firstname" name="firstname"
+      formControlName="firstname">
   </div>
 
-  <div class="text-danger mb-3"
-  *ngIf="(!firstname?.valid && (firstname?.dirty ||firstname?.touched))">
+  <div class="text-danger mb-3" *ngIf="(!firstname?.valid && (firstname?.dirty ||firstname?.touched))">
 
-  <div [hidden]="!firstname.errors.pattern">
-    Nu ai introdus un nume valid
-  </div>
-  <div [hidden]="!firstname.errors.maxlength">
-    Lungimea maxima 15
-  </div>
+    <div [hidden]="!firstname.errors.pattern">
+      Nu ai introdus un nume valid
+    </div>
+    <div [hidden]="!firstname.errors.maxlength">
+      Lungimea maxima 15
+    </div>
   </div>
   <!-- Custom Validator for firstname and lastname -->
   <div class="text-danger mb-3" [hidden]="namesValide">
@@ -24,7 +24,8 @@
   <div class="form-group">
     <label for="lastname">Prenume</label>
 
-    <input (input)="namesValidator()" class="form-control" type="text" id="lastname" name="lastname" formControlName="lastname">
+    <input (input)="namesValidator()" class="form-control" type="text" id="lastname" name="lastname"
+      formControlName="lastname">
   </div>
 
   <div class="text-danger mb-3"
@@ -37,10 +38,10 @@
     </div>
   </div>
 
-    <!-- Custom Validator for firstname and lastname -->
-    <div class="text-danger mb-3" [hidden]="namesValide">
-      Introdu un nume sau prenume
-    </div>
+  <!-- Custom Validator for firstname and lastname -->
+  <div class="text-danger mb-3" [hidden]="namesValide">
+    Introdu un nume sau prenume
+  </div>
 
   <div class="form-group">
     <label for="date">Data nașterii</label>

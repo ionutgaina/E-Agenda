@@ -14,6 +14,7 @@ export class CreateContactComponent implements OnInit {
   contactsList = ['Personal', 'Serviciu', 'Acasă'];
   addressesList = ['Serviciu', 'Acasă'];
   namesValide: boolean = false;
+  isSubmit: boolean = false;
 
   constructor(
     private router: Router,
@@ -65,6 +66,8 @@ export class CreateContactComponent implements OnInit {
 
   savePerson() {
     const formValues = this.personForm.value;
+    this.isSubmit = true;
+
     let id = this.agendaService.createPerson(formValues);
     Swal.fire({
       icon: 'success',
@@ -77,18 +80,7 @@ export class CreateContactComponent implements OnInit {
     });
   }
   cancelCreate() {
-    Swal.fire({
-      title: 'Datele introduse nu vor fi salvate',
-      showDenyButton: true,
-      confirmButtonText: 'Ok',
-      confirmButtonColor: 'red',
-      denyButtonText: 'Renunță',
-      denyButtonColor: 'green',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.router.navigate(['/agenda']);
-      }
-    });
+    this.router.navigate(['/agenda']);
   }
 
   namesValidator() {
