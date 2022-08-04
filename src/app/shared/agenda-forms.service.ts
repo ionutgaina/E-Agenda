@@ -30,12 +30,13 @@ export class AgendaFormsService {
       addresses: this.formBuilder.array([]),
       notes: [person.notes || ''],
     });
-
+    if ( person.contacts )
     for (let contact of person.contacts) {
       let contactForm = this.contactForm(contact.number, contact.type);
       myForm.controls['contacts'].push(contactForm);
     }
 
+    if ( person.contacts )
     for (let address of person.addresses) {
       let addressForm = this.addressForm(
         address.location?.street,
