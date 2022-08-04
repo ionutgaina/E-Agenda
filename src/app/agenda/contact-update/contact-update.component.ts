@@ -105,7 +105,7 @@ export class ContactUpdateComponent implements OnInit {
       showDenyButton: true,
       confirmButtonText: 'Da',
       confirmButtonColor: 'red',
-      denyButtonText: 'Nu',
+      denyButtonText: 'Renunță',
       denyButtonColor: 'green',
     }).then((result) => {
       if (result.isConfirmed) {

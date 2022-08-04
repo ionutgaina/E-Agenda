@@ -73,7 +73,7 @@ export class CreateContactComponent implements OnInit {
       showConfirmButton: false,
       timer: 1500,
     }).then(() => {
-      // this.router.navigate(['/agenda', id]);
+      this.router.navigate(['/agenda', id]);
     });
   }
   cancelCreate() {
