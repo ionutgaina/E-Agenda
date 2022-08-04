@@ -1,12 +1,12 @@
 <div *ngIf="person">
   <p class="fs-3 text-center">Detalii contact</p>
 
-  <div class="form-group">
+  <div *ngIf="person.firstname[0]" class="form-group">
     <label for="firstname">Nume</label>
     <input class="form-control" type="text" name="firstname" [value]="person.firstname" disabled>
   </div>
 
-  <div class="form-group">
+  <div *ngIf="person.lastname[0]" class="form-group">
     <label for="lastname">Prenume</label>
     <input class="form-control" type="text" name="lastname" [value]="person.lastname" disabled>
   </div>

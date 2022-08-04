@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 
 @Component({
   templateUrl: './create-contact.component.html',
-  styleUrls: ['./create-contact.component.css'],
+  styles: [],
 })
 export class CreateContactComponent implements OnInit {
   personForm: any;

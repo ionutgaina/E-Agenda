@@ -20,7 +20,7 @@ import { ContactUpdateComponent } from './agenda/contact-update/contact-update.c
     ContactThumbnailComponent,
     ContactDetailsComponent,
     CreateContactComponent,
-    ContactUpdateComponent,
+    ContactUpdateComponent
   ],
   imports: [
     BrowserModule,

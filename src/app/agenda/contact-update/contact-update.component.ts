@@ -18,6 +18,7 @@ export class ContactUpdateComponent implements OnInit {
 
   contactsList = ['Personal', 'Serviciu', 'Acasă'];
   addressesList = ['Serviciu', 'Acasă'];
+  namesValide: boolean = true;
 
   constructor(
     private router: Router,
@@ -32,6 +33,8 @@ export class ContactUpdateComponent implements OnInit {
       this.person = this.agendaService.getPerson(id);
 
       this.personForm = this.agendaFormsService.personForm(this.person);
+
+      this.namesValidator()
     });
   }
 
@@ -109,5 +112,11 @@ export class ContactUpdateComponent implements OnInit {
         this.router.navigate(['/agenda/' + this.person?.id]);
       }
     });
+  }
+
+  namesValidator() {
+    this.firstname.value === '' && this.lastname.value === ''
+      ? (this.namesValide = false)
+      : (this.namesValide = true);
   }
 }
