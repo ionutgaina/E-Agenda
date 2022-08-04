@@ -13,16 +13,14 @@ export class AgendaFormsService {
         person.firstname || '',
         [
           Validators.pattern("^[a-zA-Z'-]+$"),
-          Validators.maxLength(15),
-          Validators.required,
+          Validators.maxLength(15)
         ],
       ],
       lastname: [
         person.lastname || '',
         [
           Validators.pattern("^[a-zA-Z'-]+$"),
-          Validators.maxLength(15),
-          Validators.required,
+          Validators.maxLength(15)
         ],
       ],
       date: [person.date || ''],

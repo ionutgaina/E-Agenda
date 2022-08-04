@@ -2,32 +2,32 @@
 <form [formGroup]="personForm" (ngSubmit)="savePerson()" novalidate>
 
   <div class="form-group">
-    <label for="firstname">Nume <em class="text-danger" [hidden]="!firstname.errors?.required">
-        Camp obligatoriu
-      </em></label>
-    <input class="form-control" type="text" id="firstname" name="firstname" formControlName="firstname">
+    <label for="firstname">Nume</label>
+    <input (input)="namesValidator()" class="form-control" type="text" id="firstname" name="firstname" formControlName="firstname">
   </div>
 
-  <div class="text-danger"
-    *ngIf="!firstname?.valid && (firstname?.dirty ||firstname?.touched) && !firstname.errors?.required">
+  <div class="text-danger mb-3"
+  *ngIf="(!firstname?.valid && (firstname?.dirty ||firstname?.touched))">
 
-    <div [hidden]="!firstname.errors.pattern && !firstname.errors.required">
-      Nu ai introdus un nume valid
-    </div>
-    <div [hidden]="!firstname.errors.maxlength">
-      Lungimea maxima 15
-    </div>
+  <div [hidden]="!firstname.errors.pattern">
+    Nu ai introdus un nume valid
+  </div>
+  <div [hidden]="!firstname.errors.maxlength">
+    Lungimea maxima 15
+  </div>
+  </div>
+  <!-- Custom Validator for firstname and lastname -->
+  <div class="text-danger mb-3" [hidden]="namesValide">
+    Introdu un nume sau prenume
   </div>
 
   <div class="form-group">
-    <label for="lastname">Prenume <em class="text-danger" [hidden]="!lastname.errors?.required">
-        Camp obligatoriu
-      </em></label>
+    <label for="lastname">Prenume</label>
 
-    <input class="form-control" type="text" id="lastname" name="lastname" formControlName="lastname">
+    <input (input)="namesValidator()" class="form-control" type="text" id="lastname" name="lastname" formControlName="lastname">
   </div>
 
-  <div class="text-danger"
+  <div class="text-danger mb-3"
     *ngIf="!lastname?.valid && (lastname?.dirty ||lastname?.touched) && !lastname.errors?.required">
     <div [hidden]="!lastname.errors.pattern && !lastname.errors.required">
       Nu ai introdus un prenume valid
@@ -36,6 +36,11 @@
       Lungimea maxima 15
     </div>
   </div>
+
+    <!-- Custom Validator for firstname and lastname -->
+    <div class="text-danger mb-3" [hidden]="namesValide">
+      Introdu un nume sau prenume
+    </div>
 
   <div class="form-group">
     <label for="date">Data nașterii</label>
@@ -132,7 +137,7 @@
   </div>
 
   <div class="d-flex justify-content-around p-3">
-    <button class="btn btn-primary col-md-3 " type="submit" [disabled]="!personForm.valid"
+    <button class="btn btn-primary col-md-3 " type="submit" [disabled]="!personForm.valid || !namesValide"
       (click)="savePerson">Submit</button>
     <button class="btn btn-warning col-md-3 " type="button" (click)="cancelCreate()">Cancel</button>
   </div>

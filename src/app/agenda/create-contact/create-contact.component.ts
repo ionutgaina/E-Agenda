@@ -13,6 +13,7 @@ export class CreateContactComponent implements OnInit {
   personForm: any;
   contactsList = ['Personal', 'Serviciu', 'Acasă'];
   addressesList = ['Serviciu', 'Acasă'];
+  namesValide: boolean = false;
 
   constructor(
     private router: Router,
@@ -88,5 +89,11 @@ export class CreateContactComponent implements OnInit {
         this.router.navigate(['/agenda']);
       }
     });
+  }
+
+  namesValidator() {
+    this.firstname.value === '' && this.lastname.value === ''
+      ? (this.namesValide = false)
+      : (this.namesValide = true);
   }
 }
