@@ -4,6 +4,7 @@ import { ContactDetailsComponent } from './agenda/contact-details/contact-detail
 import { ContactUpdateComponent } from './agenda/contact-update/contact-update.component';
 import { CreateContactComponent } from './agenda/create-contact/create-contact.component';
 import { Error404Component } from './errors/error404/error404.component';
+import { ContactIdGuard } from './guards/contact-id.guard';
 
 export const appRoutes: Routes = [
   {
@@ -11,8 +12,8 @@ export const appRoutes: Routes = [
     component: AgendaComponent,
     children: [
       { path: 'new', component: CreateContactComponent },
-      { path:':id/update', component: ContactUpdateComponent},
-      { path: ':id', component: ContactDetailsComponent }
+      { path:':id/update', component: ContactUpdateComponent, canActivate: [ContactIdGuard]},
+      { path: ':id', component: ContactDetailsComponent, canActivate: [ContactIdGuard] }
 
     ],
   },
