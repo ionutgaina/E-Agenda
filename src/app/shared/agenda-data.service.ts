@@ -85,11 +85,11 @@ const PERSONS: IPerson[] = [
     date: '2030-07-30',
     contacts: [
       {
-        number: '0751911116',
+        number: '0752991322',
         type: 'Personal',
       },
       {
-        number: '0751955553',
+        number: '112',
         type: 'Acasă',
       },
     ],
@@ -121,11 +121,11 @@ const PERSONS: IPerson[] = [
     date: '',
     contacts: [
       {
-        number: '0751911116',
+        number: '99323412',
         type: 'Personal',
       },
       {
-        number: '0751955553',
+        number: '12345678',
         type: 'Acasă',
       },
     ],

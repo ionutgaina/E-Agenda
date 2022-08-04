@@ -13,6 +13,13 @@ export class AgendaFiltersService {
     const copy_persons = this.cloneDeep.clone(persons);
 
     result = copy_persons.filter((person: IPerson) => {
+      // Search by number phone
+      for (let contact of person.contacts) {
+        if (contact.number.includes(searchTerm)) {
+          return true;
+        }
+      }
+      // Search by firstname and lastname
       return (
         person.firstname.toLocaleLowerCase().includes(searchTerm) ||
         person.lastname.toLocaleLowerCase().includes(searchTerm)

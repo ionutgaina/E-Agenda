@@ -37,11 +37,12 @@
     <div class="form-group">
       <label for="number">Numărul de telefon</label>
       <input class="form-control" type="text" name="number" [value]="person.contacts[contactIndex].number" disabled>
-
-      <label for="type">Tipul</label>
-      <select class="form-control" name="type" disabled>
-        <option selected>{{person.contacts[contactIndex].type}}</option>
-      </select>
+      <div *ngIf="person.contacts[contactIndex].type">
+        <label for="type">Tipul</label>
+        <select class="form-control" name="type" disabled>
+          <option selected>{{person.contacts[contactIndex].type}}</option>
+        </select>
+      </div>
     </div>
   </fieldset>
 
@@ -85,11 +86,13 @@
           </div>
         </div>
       </fieldset>
+      <div *ngIf="person.addresses[addressIndex].type">
+        <label for="type">Tipul</label>
+        <select class="form-control" name="type" disabled>
+          <option selected>{{person.addresses[addressIndex].type}}</option>
+        </select>
 
-      <label for="type">Tipul</label>
-      <select class="form-control" name="type" disabled>
-        <option selected>{{person.addresses[addressIndex].type}}</option>
-      </select>
+      </div>
     </div>
   </fieldset>
 
